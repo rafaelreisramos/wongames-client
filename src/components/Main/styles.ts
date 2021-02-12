@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.main`
   height: 100vh;
@@ -20,5 +20,7 @@ export const LogoContainer = styled.div`
 
 export const Title = styled.h1`
   font-size: 3.2rem;
-  color: ${(props) => props.theme.colors.white};
+  ${({ theme }) => css`
+    color: ${theme.colors.white};
+  `}
 `

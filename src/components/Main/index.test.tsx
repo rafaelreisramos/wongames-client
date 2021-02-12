@@ -18,7 +18,7 @@ describe('<Main />', () => {
 
     expect(
       screen.getByRole('heading', { name: /next.js boilerplate/i })
-    ).toHaveStyle({ color: '#fafafa' })
+    ).toHaveStyle(`color: ${theme.colors.white}`)
 
     expect(container.firstChild).toMatchSnapshot()
   })

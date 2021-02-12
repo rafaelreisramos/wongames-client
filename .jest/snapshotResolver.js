@@ -1,9 +1,18 @@
 module.exports = {
-  testPathForConsistencyCheck: 'some/example.test.tsx',
+  resolveSnapshotPath: (testPath, snapshotExtension) => {
+    const result = testPath
+      .replace(
+        /\.test\.([tj]sx?)/,
+        `.test${snapshotExtension}`
+      )
+    return result
+  },
 
-  resolveSnapshotPath: (testPath, snapshotExtension) =>
-    testPath + snapshotExtension,
+  resolveTestPath: (snapshotFilePath, snapshotExtension) => {
+    const result = snapshotFilePath
+      .replace(snapshotExtension, '.tsx')
+    return result
+  },
 
-  resolveTestPath: (snapshotFilePath, snapshotExtension) =>
-    snapshotFilePath.slice(0, -snapshotExtension.length),
+  testPathForConsistencyCheck: 'src/components/some.test.tsx',
 }
