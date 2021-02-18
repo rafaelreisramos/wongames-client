@@ -1,3 +1,9 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const Container = styled.main``
+import { LogoProps } from '.'
+
+export const Container = styled.div<LogoProps>`
+  ${({ theme, color }) => css`
+    color: ${theme.colors[color!]};
+  `}
+`
