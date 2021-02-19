@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import media from 'styled-media-query'
 
 import { LogoProps } from '.'
 
@@ -11,13 +12,31 @@ const containerModifiers = {
   large: () => css`
     width: 20rem;
     height: 5.9rem;
+  `,
+
+  hideOnMobile: () => css`
+    ${media.lessThan('medium')`
+      width: 5.8rem;
+      height: 4.5rem;
+
+      svg {
+        height: 4.5rem;
+        pointer-events: none;
+      }
+
+      .text {
+        display: none;
+      }
+    `}
   `
 }
 
 export const Container = styled.div<LogoProps>`
-  ${({ theme, color, size }) => css`
+  ${({ theme, color, size, hideOnMobile }) => css`
     color: ${theme.colors[color!]};
 
-    ${size ? containerModifiers[size] : null}
+    ${!!size && containerModifiers[size]}
+
+    ${!!hideOnMobile && containerModifiers.hideOnMobile}
   `}
 `
