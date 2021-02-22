@@ -50,6 +50,7 @@ export const Container = styled.button<ContainerProps>`
     background: linear-gradient(180deg, #ff5f5f 0%, #f062c0 50%);
     color: ${theme.colors.white};
     border: none;
+    cursor: pointer;
     border-radius: ${theme.border.radius};
 
     ${!!size && containerModifiers[size](theme)};
