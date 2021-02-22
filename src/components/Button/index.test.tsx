@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react'
+import { AddShoppingCart } from '@styled-icons/material-outlined'
 
 import { renderWithTheme } from 'utils/tests/helpers'
 
@@ -41,5 +42,14 @@ describe('<Heading />', () => {
     expect(screen.getByRole('button', { name: /button/i })).toHaveStyle({
       width: '100%'
     })
+  })
+
+  it('should render an icon button', () => {
+    renderWithTheme(
+      <Button icon={<AddShoppingCart data-testid="icon" />}>Button</Button>
+    )
+
+    expect(screen.getByText(/button/i)).toBeInTheDocument()
+    expect(screen.getByTestId(/icon/i)).toBeInTheDocument()
   })
 })
