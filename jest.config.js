@@ -7,7 +7,10 @@ module.exports = {
   testEnvironment: 'jsdom',
   testMatch: ['<rootDir>/src/**/?(*.)+(spec|test).[tj]s?(x)'],
   testPathIgnorePatterns: ['/node_modules/', '/.next/'],
-  collectCoverageFrom: ['<rootDir>/src/**/*.ts(x)?'],
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.ts(x)?',
+    '!<rootDir>/src/**/*.stories.tsx'
+  ],
   coverageDirectory: '<rootDir>/__coverage__',
   modulePaths: ['<rootDir>/src'],
   setupFilesAfterEnv: ['<rootDir>/.jest/setup.ts'],
