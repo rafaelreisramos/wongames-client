@@ -33,7 +33,7 @@ export const MenuGroup = styled.div`
     display: flex;
 
     > div {
-      margin-left: ${theme.spacings.xxsmall};
+      margin-left: ${theme.spacings.xsmall};
     }
   `}
 `
