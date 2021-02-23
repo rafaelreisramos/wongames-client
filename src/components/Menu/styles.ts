@@ -5,7 +5,6 @@ export const Container = styled.menu`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: ${theme.spacings.small} 0;
     position: relative;
   `}
@@ -31,6 +30,9 @@ export const LogoContainer = styled.div`
 export const MenuGroup = styled.div`
   ${({ theme }) => css`
     display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    align-items: center;
 
     > div {
       margin-left: ${theme.spacings.xsmall};
@@ -39,17 +41,18 @@ export const MenuGroup = styled.div`
 `
 
 export const MenuNav = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  ${({ theme }) => css`
+    ${media.greaterThan('medium')`
+      margin-left: ${theme.spacings.small};
+    `}
+  `}
 `
 
 export const MenuLink = styled.a`
   ${({ theme }) => css`
     position: relative;
     font-size: ${theme.font.sizes.medium};
+    color: ${theme.colors.white};
     margin: 0.3rem ${theme.spacings.small} 0;
     text-decoration: none;
     text-align: center;
@@ -107,6 +110,14 @@ export const MenuFull = styled.nav<MenuFullProps>`
       cursor: pointer;
       width: 2.4rem;
       height: 2.4rem;
+    }
+
+    ${MenuNav} {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     ${MenuLink} {
