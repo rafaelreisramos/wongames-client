@@ -54,4 +54,17 @@ describe('<Heading />', () => {
     expect(screen.getByText(/button/i)).toBeInTheDocument()
     expect(screen.getByTestId(/icon/i)).toBeInTheDocument()
   })
+
+  it('should render button as a link', () => {
+    renderWithTheme(
+      <Button as="a" href="/link">
+        Link
+      </Button>
+    )
+
+    expect(screen.getByRole('link', { name: /link/i })).toHaveAttribute(
+      'href',
+      '/link'
+    )
+  })
 })
