@@ -12,7 +12,7 @@ module.exports = {
     '!<rootDir>/src/**/*.stories.tsx'
   ],
   coverageDirectory: '<rootDir>/__coverage__',
-  modulePaths: ['<rootDir>/src'],
+  modulePaths: ['<rootDir>/src', '<rootDir>/.jest'],
   setupFilesAfterEnv: ['<rootDir>/.jest/setup.ts'],
   snapshotResolver: './.jest/snapshotResolver.js'
 }
