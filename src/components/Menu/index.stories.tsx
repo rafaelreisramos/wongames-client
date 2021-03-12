@@ -4,14 +4,17 @@ import Menu, { MenuProps } from '.'
 
 export default {
   title: 'Menu',
-  component: Menu
+  component: Menu,
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    },
+    layout: 'fullscreen'
+  }
 } as Meta
 
-export const Default: Story<MenuProps> = (args) => <Menu {...args} />
-
-Default.parameters = {
-  layout: 'fullscreen',
-  backgrounds: {
-    default: 'dark'
-  }
-}
+export const Default: Story<MenuProps> = (args) => (
+  <div style={{ maxWidth: '130rem', margin: '0 auto' }}>
+    <Menu {...args} />
+  </div>
+)

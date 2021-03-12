@@ -18,7 +18,10 @@ export default {
     buttonLink: '/games/read-dead'
   },
   parameters: {
-    layout: 'fullscreen'
+    layout: 'fullscreen',
+    backgrounds: {
+      default: 'won-dark'
+    }
   }
 } as Meta
 

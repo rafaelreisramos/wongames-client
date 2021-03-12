@@ -7,6 +7,23 @@ import theme from 'styles/theme'
 
 addDecorator(withNextRouter())
 
+export const parameters = {
+  backgrounds: {
+    default: 'won-light',
+    values: [
+      {
+        name: 'won-light',
+        value: theme.colors.white
+      },
+      {
+        name: 'won-dark',
+        value: theme.colors.mainBg
+      }
+    ]
+  },
+  actions: { argTypesRegex: "^on[A-Z].*" }
+}
+
 export const decorators = [
   (Story) => (
     <ThemeProvider theme={theme}>
@@ -15,7 +32,3 @@ export const decorators = [
     </ThemeProvider>
   ),
 ]
-
-export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" }
-}

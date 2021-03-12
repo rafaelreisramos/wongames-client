@@ -9,9 +9,18 @@ export default {
     children: {
       type: 'string'
     }
+  },
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
   }
 } as Meta
 
 export const Default: Story<HeadingProps> = (args) => <Heading {...args} />
 
-Default.args = { children: 'Most Populars' }
+Default.args = {
+  children: 'Most Populars',
+  lineLeft: true,
+  lineColor: 'secondary'
+}
