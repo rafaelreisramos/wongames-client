@@ -9,7 +9,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <Head>
-        <title>Next app boilerplate</title>
+        <title>Won Games</title>
         <link
           rel="shortcut icon"
           type="image/png"
@@ -22,10 +22,7 @@ function App({ Component, pageProps }: AppProps) {
         />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ffffff" />
-        <meta
-          name="description"
-          content="Next app boilerplate with Jest, Typescript and Styled Components"
-        />
+        <meta name="description" content="The best game store in the world" />
       </Head>
 
       <Component {...pageProps} />
