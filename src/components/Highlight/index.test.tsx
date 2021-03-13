@@ -1,24 +1,20 @@
 import { screen } from '@testing-library/react'
 
 import { renderWithTheme } from 'utils/tests/helpers'
+import item from './data.mock'
 
 import Highlight from '.'
+
 import * as S from './styles'
 
-const props = {
-  backgroundImage: '/img/red-dead-img.jpg',
-  title: `Read Dead it's back`,
-  subtitle: `Come see John's new adventures`,
-  buttonLabel: 'Buy now',
-  buttonLink: '/games/read-dead'
-}
+const props = { ...item }
 
 describe('<Highlight />', () => {
   it('should render headings and button', () => {
     const { container } = renderWithTheme(<Highlight {...props} />)
 
     expect(
-      screen.getByRole('heading', { name: /Read Dead it's back/i })
+      screen.getByRole('heading', { name: /Red Dead it's back/i })
     ).toBeInTheDocument()
 
     expect(

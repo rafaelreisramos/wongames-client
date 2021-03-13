@@ -2,6 +2,8 @@ import { Story, Meta } from '@storybook/react/types-6-0'
 
 import Highlight, { HighlightProps } from '.'
 
+import item from './data.mock'
+
 export default {
   title: 'Highlight',
   component: Highlight,
@@ -10,13 +12,7 @@ export default {
       floatImage: 'string'
     }
   },
-  args: {
-    backgroundImage: '/img/red-dead-img.jpg',
-    title: `Read Dead it's back`,
-    subtitle: `Come see John's new adventures`,
-    buttonLabel: 'Buy now',
-    buttonLink: '/games/read-dead'
-  },
+  args: { ...item },
   parameters: {
     layout: 'fullscreen',
     backgrounds: {
