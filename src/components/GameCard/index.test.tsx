@@ -2,15 +2,11 @@ import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { renderWithTheme } from 'utils/tests/helpers'
+import item from './data.mock'
 
 import GameCard from '.'
 
-const props = {
-  img: '/img/red-dead-img.jpg',
-  title: `Read Dead II Redemption`,
-  developer: `Rockstar Games`,
-  price: 'R$ 235,00'
-}
+const { promotionalPrice, ...props } = { ...item }
 
 describe('<GameCard />', () => {
   it('should render correctly', () => {
@@ -39,7 +35,7 @@ describe('<GameCard />', () => {
   })
 
   it('should render a line-through in price when promotional', () => {
-    renderWithTheme(<GameCard {...props} promotionalPrice="R$ 195,00" />)
+    renderWithTheme(<GameCard {...props} promotionalPrice={promotionalPrice} />)
 
     expect(screen.getByText(props.price)).toHaveStyle({
       textDecoration: 'line-through'
