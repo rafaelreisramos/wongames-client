@@ -9,7 +9,8 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/', '/.next/'],
   collectCoverageFrom: [
     '<rootDir>/src/**/*.ts(x)?',
-    '!<rootDir>/src/**/*.stories.tsx'
+    '!<rootDir>/src/**/*.stories.tsx',
+    '!<rootDir>/src/pages/**/*.ts(x)?'
   ],
   coverageDirectory: '<rootDir>/__coverage__',
   modulePaths: ['<rootDir>/src', '<rootDir>/.jest'],
