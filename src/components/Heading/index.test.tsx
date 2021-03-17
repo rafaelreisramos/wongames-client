@@ -57,6 +57,18 @@ describe('<Heading />', () => {
     })
   })
 
+  it('should render a heading with a huge size', () => {
+    renderWithTheme(
+      <Heading size="huge" lineLeft>
+        Most Populars
+      </Heading>
+    )
+
+    expect(
+      screen.getByRole('heading', { name: /most populars/i })
+    ).toHaveStyle({ 'font-size': '5.2rem' })
+  })
+
   it('should render a heading with a primary line color', () => {
     renderWithTheme(
       <Heading lineColor="primary" lineLeft lineBottom>
