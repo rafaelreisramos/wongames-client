@@ -2,7 +2,7 @@ import styled, { css, DefaultTheme } from 'styled-components'
 
 import { ButtonProps } from '.'
 
-type ContainerProps = { hasIcon: boolean } & Pick<
+export type ContainerProps = { hasIcon: boolean } & Pick<
   ButtonProps,
   'size' | 'fullWidth'
 >
