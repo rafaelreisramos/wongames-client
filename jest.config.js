@@ -11,7 +11,9 @@ module.exports = {
     '<rootDir>/src/**/*.ts(x)?',
     '!<rootDir>/src/**/*.stories.tsx',
     '!<rootDir>/src/pages/**/*.ts(x)?',
-    '!<rootDir>/src/**/*.mock.ts(x)?'
+    '!<rootDir>/src/styles/**/*.ts',
+    '!<rootDir>/src/**/*.mock.ts(x)?',
+    '!<rootDir>/src/types/*.d.ts'
   ],
   coverageDirectory: '<rootDir>/__coverage__',
   modulePaths: ['<rootDir>/src', '<rootDir>/.jest'],
