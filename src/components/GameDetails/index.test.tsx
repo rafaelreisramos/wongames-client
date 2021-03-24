@@ -5,10 +5,10 @@ import { renderWithTheme } from 'utils/tests/helpers'
 import GameDetails, { GameDetailsProps } from '.'
 
 const props: GameDetailsProps = {
-  developer: 'Developer',
+  developer: 'Game Developer',
   platforms: ['windows', 'linux', 'mac'],
   releaseDate: '2020-11-21T23:00:00',
-  publisher: 'Publisher',
+  publisher: 'Game Publisher',
   rating: 'BR0',
   genres: ['Action', 'Adventure']
 }
@@ -31,6 +31,13 @@ describe('<GameDetails />', () => {
     ).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /Rating/i })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /Genres/i })).toBeInTheDocument()
+  })
+
+  it('should render the publisher and the developer', () => {
+    renderWithTheme(<GameDetails {...props} />)
+
+    expect(screen.getByText(/Game developer/i)).toBeInTheDocument()
+    expect(screen.getByText(/Game publisher/i)).toBeInTheDocument()
   })
 
   it('should render platforms icons', () => {
