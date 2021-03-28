@@ -36,6 +36,13 @@ const containerModifiers = {
     }
   `,
 
+  disabled: () => css`
+    &:disabled {
+      cursor: not-allowed;
+      filter: saturate(0);
+    }
+  `,
+
   fullWidth: () => css`
     width: 100%;
   `,
@@ -52,7 +59,7 @@ const containerModifiers = {
 }
 
 export const Container = styled.button<ContainerProps>`
-  ${({ theme, size, fullWidth, hasIcon, minimal }) => css`
+  ${({ theme, size, fullWidth, hasIcon, minimal, disabled }) => css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -71,7 +78,8 @@ export const Container = styled.button<ContainerProps>`
 
     ${!!size && containerModifiers[size](theme)};
     ${fullWidth && containerModifiers.fullWidth()};
-    ${hasIcon && containerModifiers.withIcon(theme)}
-    ${minimal && containerModifiers.minimal(theme)}
+    ${hasIcon && containerModifiers.withIcon(theme)};
+    ${minimal && containerModifiers.minimal(theme)};
+    ${disabled && containerModifiers.disabled()};
   `}
 `
