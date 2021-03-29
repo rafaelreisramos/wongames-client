@@ -72,6 +72,14 @@ describe('<Heading />', () => {
     ).toHaveStyleRule('background', 'none', { modifier: ':hover' })
   })
 
+  it('should render a disabled button', () => {
+    renderWithTheme(<Button disabled>Button</Button>)
+
+    expect(
+      screen.getByRole('button', { name: /button/i })
+    ).toHaveStyleRule('cursor', 'not-allowed', { modifier: ':disabled' })
+  })
+
   it('should render button as a link', () => {
     renderWithTheme(
       <Button as="a" href="/link">
