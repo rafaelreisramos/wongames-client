@@ -15,6 +15,7 @@ export type GameItemProps = {
   price: string
   downloadLink?: string
   paymentInfo?: PaymentInfoProps
+  as?: React.ElementType
 }
 
 const GameItem = ({
@@ -22,9 +23,10 @@ const GameItem = ({
   title,
   price,
   downloadLink,
-  paymentInfo
+  paymentInfo,
+  ...props
 }: GameItemProps) => (
-  <S.Container>
+  <S.Container {...props}>
     <S.GameContent>
       <S.ImageBox>
         <img src={img} alt={title} />
