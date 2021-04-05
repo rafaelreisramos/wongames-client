@@ -10,8 +10,8 @@ const Dropdown = ({ title, children }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <S.Container isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
-      <S.Title>{title}</S.Title>
+    <S.Container isOpen={isOpen}>
+      <S.Title onClick={() => setIsOpen(!isOpen)}>{title}</S.Title>
 
       <S.Content aria-hidden={!isOpen}>{children}</S.Content>
     </S.Container>
