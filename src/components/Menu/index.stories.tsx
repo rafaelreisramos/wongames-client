@@ -18,3 +18,13 @@ export const Default: Story<MenuProps> = (args) => (
     <Menu {...args} />
   </div>
 )
+
+export const Logged: Story<MenuProps> = (args) => (
+  <div style={{ maxWidth: '130rem', margin: '0 auto' }}>
+    <Menu {...args} />
+  </div>
+)
+
+Logged.args = {
+  username: 'John Doe'
+}
