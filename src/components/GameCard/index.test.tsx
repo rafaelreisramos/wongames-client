@@ -10,7 +10,7 @@ const { promotionalPrice, ...props } = { ...item }
 
 describe('<GameCard />', () => {
   it('should render correctly', () => {
-    renderWithTheme(<GameCard {...props} />)
+    const { container } = renderWithTheme(<GameCard {...props} />)
 
     expect(
       screen.getByRole('heading', { name: props.title })
@@ -22,7 +22,13 @@ describe('<GameCard />', () => {
       'src',
       props.img
     )
+    expect(screen.getByRole('link', { name: props.title })).toHaveAttribute(
+      'href',
+      `/game/${props.slug}`
+    )
     expect(screen.getByLabelText(/Add to Wishlist/i)).toBeInTheDocument()
+
+    expect(container.firstChild).toMatchSnapshot()
   })
 
   it('should render price in label', () => {
