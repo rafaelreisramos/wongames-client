@@ -13,7 +13,9 @@ module.exports = {
     '!<rootDir>/src/pages/**/*.ts(x)?',
     '!<rootDir>/src/styles/**/*.ts',
     '!<rootDir>/src/**/*.mock.ts(x)?',
-    '!<rootDir>/src/types/*.d.ts'
+    '!<rootDir>/src/types/**/*.d.ts',
+    '!<rootDir>/src/graphql/**/*.ts',
+    '!<rootDir>/src/utils/apollo.ts'
   ],
   coverageDirectory: '<rootDir>/__coverage__',
   modulePaths: ['<rootDir>/src', '<rootDir>/.jest'],
