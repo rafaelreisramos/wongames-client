@@ -4,6 +4,7 @@ import {
   InMemoryCache,
   NormalizedCacheObject
 } from '@apollo/client'
+import { concatPagination } from '@apollo/client/utilities'
 import { useMemo } from 'react'
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
@@ -16,12 +17,7 @@ function createApolloClient() {
       typePolicies: {
         Query: {
           fields: {
-            games: {
-              keyArgs: false,
-              merge(existing = [], incoming) {
-                return [...existing, ...incoming]
-              }
-            }
+            games: concatPagination()
           }
         }
       }
