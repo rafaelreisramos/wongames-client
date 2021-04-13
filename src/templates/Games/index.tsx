@@ -18,12 +18,9 @@ export type GamesTemplateProps = {
 }
 
 const Games = ({ filterItems }: GamesTemplateProps) => {
-  const { data, loading } = useQuery<QueryGames, QueryGamesVariables>(
-    QUERY_GAMES,
-    {
-      variables: { limit: 15 }
-    }
-  )
+  const { data } = useQuery<QueryGames, QueryGamesVariables>(QUERY_GAMES, {
+    variables: { limit: 15 }
+  })
 
   const handleFilter = () => {
     return
@@ -38,36 +35,32 @@ const Games = ({ filterItems }: GamesTemplateProps) => {
       <S.Main>
         <ExploreSidebar items={filterItems} onFilter={handleFilter} />
 
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <section>
-            {data?.games.length ? (
-              <Grid>
-                {data?.games.map((game) => (
-                  <GameCard
-                    key={game.slug}
-                    title={game.name}
-                    slug={game.slug}
-                    img={`http://localhost:1337${game.cover?.url}`}
-                    developer={game.developers[0].name}
-                    price={game.price}
-                  />
-                ))}
-              </Grid>
-            ) : (
-              <Empty
-                title="Sorry, no games found mathing this search criteria."
-                description="Try again with another terms or selection."
-              />
-            )}
+        <section>
+          {data?.games.length ? (
+            <Grid>
+              {data?.games.map((game) => (
+                <GameCard
+                  key={game.slug}
+                  title={game.name}
+                  slug={game.slug}
+                  img={`http://localhost:1337${game.cover?.url}`}
+                  developer={game.developers[0].name}
+                  price={game.price}
+                />
+              ))}
+            </Grid>
+          ) : (
+            <Empty
+              title="Sorry, no games found mathing this search criteria."
+              description="Try again with another terms or selection."
+            />
+          )}
 
-            <S.ShowMore role="button" onClick={handleShowMore}>
-              <p>Show More</p>
-              <ArrowDown />
-            </S.ShowMore>
-          </section>
-        )}
+          <S.ShowMore role="button" onClick={handleShowMore}>
+            <p>Show More</p>
+            <ArrowDown />
+          </S.ShowMore>
+        </section>
       </S.Main>
     </Base>
   )

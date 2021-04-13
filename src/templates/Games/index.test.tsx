@@ -46,16 +46,6 @@ jest.mock('components/Empty', () => {
 })
 
 describe('<Games />', () => {
-  it('should render loading when starting the template', () => {
-    renderWithTheme(
-      <MockedProvider mocks={[]} addTypename={false}>
-        <Games filterItems={filterItemsMock as ItemProps[]} />
-      </MockedProvider>
-    )
-
-    expect(screen.getByText(/loading.../i)).toBeInTheDocument()
-  })
-
   it('should render the sections', async () => {
     const queryMocks = [
       {
@@ -89,8 +79,6 @@ describe('<Games />', () => {
         <Games filterItems={filterItemsMock as ItemProps[]} />
       </MockedProvider>
     )
-
-    expect(screen.getByText(/loading.../i)).toBeInTheDocument()
 
     expect(screen.getByTestId('Mock ExploreSidebar')).toBeInTheDocument()
     expect(await screen.findByText(/Sample game/i)).toBeInTheDocument()
