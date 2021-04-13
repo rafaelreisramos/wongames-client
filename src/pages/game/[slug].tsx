@@ -7,11 +7,17 @@ import {
   QueryGameBySlug,
   QueryGameBySlugVariables
 } from 'graphql/generated/QueryGameBySlug'
+import { QueryRecommended } from 'graphql/generated/QueryRecommended'
+import {
+  QueryUpcoming,
+  QueryUpcomingVariables
+} from 'graphql/generated/QueryUpcoming'
 import { QUERY_GAMES, QUERY_GAMES_BY_SLUG } from 'graphql/queries/games'
+import { QUERY_RECOMMENDED } from 'graphql/queries/recommended'
+import { QUERY_UPCOMING } from 'graphql/queries/upcoming'
 
 import Game, { GameTemplateProps } from 'templates/Game'
-import gamesMock from 'components/GameCardSlider/data.mock'
-import highlightMock from 'components/Highlight/data.mock'
+import { gamesMapper, highlightMapper } from 'utils/mappers'
 
 const apolloClient = initializeApollo()
 
@@ -49,6 +55,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const game = data.games[0]
 
+  const {
+    data: { recommended }
+  } = await apolloClient.query<QueryRecommended>({ query: QUERY_RECOMMENDED })
+
+  const TODAY = new Date().toISOString().slice(0, 10) // 2021-04-08
+
+  const {
+    data: { upcomingGames, showcase }
+  } = await apolloClient.query<QueryUpcoming, QueryUpcomingVariables>({
+    query: QUERY_UPCOMING,
+    variables: { date: TODAY }
+  })
+
   return {
     props: {
       revalidate: 60,
@@ -71,9 +90,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         rating: game.rating,
         genres: game.categories.map((category) => category.name)
       },
-      upcomingGames: gamesMock,
-      upcomingHighlight: highlightMock,
-      recommendedGames: gamesMock
+      upcomingGamesTitle: showcase?.upcomingGames?.title,
+      upcomingGames: gamesMapper(upcomingGames),
+      upcomingHighlight: highlightMapper(showcase?.upcomingGames?.highlight),
+      recommendedTitle: recommended?.section?.title,
+      recommendedGames: gamesMapper(recommended?.section?.games)
     }
   }
 }

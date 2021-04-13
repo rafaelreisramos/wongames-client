@@ -9,6 +9,7 @@ import Wishlist, { WhishlistTemplateProps } from '.'
 
 const props: WhishlistTemplateProps = {
   games: gamesMock,
+  recommendedTitle: 'You may like these games',
   recommendedHighlight: highlightMock,
   recommendedGames: [gamesMock[0]]
 }
@@ -59,6 +60,7 @@ describe('<Wishlist />', () => {
   it('should render empty when there are no games', () => {
     renderWithTheme(
       <Wishlist
+        recommendedTitle="You may like these games"
         recommendedGames={gamesMock}
         recommendedHighlight={highlightMock}
       />
