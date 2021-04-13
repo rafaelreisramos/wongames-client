@@ -1,4 +1,8 @@
+import { useQuery } from '@apollo/client'
 import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined'
+
+import { QueryGames, QueryGamesVariables } from 'graphql/generated/QueryGames'
+import { QUERY_GAMES } from 'graphql/queries/games'
 
 import Base from 'templates/Base'
 import GameCard, { GameCardProps } from 'components/GameCard'
@@ -13,7 +17,14 @@ export type GamesTemplateProps = {
   filterItems: ItemProps[]
 }
 
-const Games = ({ games = [], filterItems }: GamesTemplateProps) => {
+const Games = ({ filterItems }: GamesTemplateProps) => {
+  const { data, loading } = useQuery<QueryGames, QueryGamesVariables>(
+    QUERY_GAMES,
+    {
+      variables: { limit: 15 }
+    }
+  )
+
   const handleFilter = () => {
     return
   }
@@ -27,25 +38,36 @@ const Games = ({ games = [], filterItems }: GamesTemplateProps) => {
       <S.Main>
         <ExploreSidebar items={filterItems} onFilter={handleFilter} />
 
-        <section>
-          {games.length ? (
-            <Grid>
-              {games.map((game) => (
-                <GameCard key={game.title} {...game} />
-              ))}
-            </Grid>
-          ) : (
-            <Empty
-              title="Sorry, no games found mathing this search criteria."
-              description="Try again with another terms or selection."
-            />
-          )}
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <section>
+            {data?.games.length ? (
+              <Grid>
+                {data?.games.map((game) => (
+                  <GameCard
+                    key={game.slug}
+                    title={game.name}
+                    slug={game.slug}
+                    img={`http://localhost:1337${game.cover?.url}`}
+                    developer={game.developers[0].name}
+                    price={game.price}
+                  />
+                ))}
+              </Grid>
+            ) : (
+              <Empty
+                title="Sorry, no games found mathing this search criteria."
+                description="Try again with another terms or selection."
+              />
+            )}
 
-          <S.ShowMore role="button" onClick={handleShowMore}>
-            <p>Show More</p>
-            <ArrowDown />
-          </S.ShowMore>
-        </section>
+            <S.ShowMore role="button" onClick={handleShowMore}>
+              <p>Show More</p>
+              <ArrowDown />
+            </S.ShowMore>
+          </section>
+        )}
       </S.Main>
     </Base>
   )

@@ -1,12 +1,22 @@
 import { screen } from '@testing-library/react'
+import { MockedProvider } from '@apollo/client/testing'
 
 import { renderWithTheme } from 'utils/tests/helpers'
+import { QUERY_GAMES } from 'graphql/queries/games'
 
 import { ItemProps } from 'components/ExploreSidebar'
-import gamesMock from 'components/GameCardSlider/data.mock'
 import filterItemsMock from 'components/ExploreSidebar/data.mock'
 
 import Games from '.'
+
+jest.mock('next/link', () => {
+  return {
+    __esModule: true,
+    default: function Mock({ children }: { children: React.ReactNode }) {
+      return children
+    }
+  }
+})
 
 jest.mock('templates/Base', () => {
   return {
@@ -26,15 +36,6 @@ jest.mock('components/ExploreSidebar', () => {
   }
 })
 
-jest.mock('components/GameCard', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="Mock GameCard"></div>
-    }
-  }
-})
-
 jest.mock('components/Empty', () => {
   return {
     __esModule: true,
@@ -45,25 +46,83 @@ jest.mock('components/Empty', () => {
 })
 
 describe('<Games />', () => {
-  it('should render the sections', () => {
+  it('should render loading when starting the template', () => {
     renderWithTheme(
-      <Games
-        games={[gamesMock[0]]}
-        filterItems={filterItemsMock as ItemProps[]}
-      />
+      <MockedProvider mocks={[]} addTypename={false}>
+        <Games filterItems={filterItemsMock as ItemProps[]} />
+      </MockedProvider>
     )
 
+    expect(screen.getByText(/loading.../i)).toBeInTheDocument()
+  })
+
+  it('should render the sections', async () => {
+    const queryMocks = [
+      {
+        request: {
+          query: QUERY_GAMES,
+          variables: {
+            limit: 15
+          }
+        },
+        result: {
+          data: {
+            games: [
+              {
+                name: 'Sample game',
+                slug: 'sample-game',
+                cover: {
+                  url: 'sample-game.jpg'
+                },
+                developers: [{ name: 'Sample Developer' }],
+                price: 120.09,
+                __typename: 'Game'
+              }
+            ]
+          }
+        }
+      }
+    ]
+
+    renderWithTheme(
+      <MockedProvider mocks={queryMocks} addTypename={false}>
+        <Games filterItems={filterItemsMock as ItemProps[]} />
+      </MockedProvider>
+    )
+
+    expect(screen.getByText(/loading.../i)).toBeInTheDocument()
+
     expect(screen.getByTestId('Mock ExploreSidebar')).toBeInTheDocument()
-    expect(screen.getByTestId('Mock GameCard')).toBeInTheDocument()
+    expect(await screen.findByText(/Sample game/i)).toBeInTheDocument()
 
     expect(
-      screen.getByRole('button', { name: /show more/i })
+      await screen.findByRole('button', { name: /show more/i })
     ).toBeInTheDocument()
   })
 
-  it('should render <Empty /> when no games were found', () => {
-    renderWithTheme(<Games filterItems={filterItemsMock as ItemProps[]} />)
+  it('should render <Empty /> when no games were found', async () => {
+    const queryMocks = [
+      {
+        request: {
+          query: QUERY_GAMES,
+          variables: {
+            limit: 15
+          }
+        },
+        result: {
+          data: {
+            games: []
+          }
+        }
+      }
+    ]
 
-    expect(screen.getByTestId('Mock Empty')).toBeInTheDocument()
+    renderWithTheme(
+      <MockedProvider mocks={queryMocks} addTypename={false}>
+        <Games filterItems={filterItemsMock as ItemProps[]} />
+      </MockedProvider>
+    )
+
+    expect(await screen.findByTestId('Mock Empty')).toBeInTheDocument()
   })
 })
