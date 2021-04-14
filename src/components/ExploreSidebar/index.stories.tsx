@@ -13,7 +13,8 @@ export default {
     }
   },
   args: {
-    items: itemsMock
+    items: itemsMock,
+    onFilter: () => console.log('filter')
   },
   argTypes: {
     items: {
