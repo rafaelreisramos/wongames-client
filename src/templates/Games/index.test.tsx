@@ -1,11 +1,13 @@
+import userEvent from '@testing-library/user-event'
 import { screen } from '@testing-library/react'
 import { MockedProvider } from '@apollo/client/testing'
+import apolloCache from 'utils/apolloCache'
 
 import { renderWithTheme } from 'utils/tests/helpers'
-import { QUERY_GAMES } from 'graphql/queries/games'
 
-import { ItemProps } from 'components/ExploreSidebar'
+import { emptyGamesMock, fetchMoreMock, gamesMock } from './data.mock'
 import filterItemsMock from 'components/ExploreSidebar/data.mock'
+import { ItemProps } from 'components/ExploreSidebar'
 
 import Games from '.'
 
@@ -47,41 +49,14 @@ jest.mock('components/Empty', () => {
 
 describe('<Games />', () => {
   it('should render the sections', async () => {
-    const queryMocks = [
-      {
-        request: {
-          query: QUERY_GAMES,
-          variables: {
-            limit: 15
-          }
-        },
-        result: {
-          data: {
-            games: [
-              {
-                name: 'Sample game',
-                slug: 'sample-game',
-                cover: {
-                  url: 'sample-game.jpg'
-                },
-                developers: [{ name: 'Sample Developer' }],
-                price: 120.09,
-                __typename: 'Game'
-              }
-            ]
-          }
-        }
-      }
-    ]
-
     renderWithTheme(
-      <MockedProvider mocks={queryMocks} addTypename={false}>
+      <MockedProvider mocks={[gamesMock]}>
         <Games filterItems={filterItemsMock as ItemProps[]} />
       </MockedProvider>
     )
 
     expect(screen.getByTestId('Mock ExploreSidebar')).toBeInTheDocument()
-    expect(await screen.findByText(/Sample game/i)).toBeInTheDocument()
+    expect(await screen.findByText(/Sample Game/i)).toBeInTheDocument()
 
     expect(
       await screen.findByRole('button', { name: /show more/i })
@@ -89,28 +64,25 @@ describe('<Games />', () => {
   })
 
   it('should render <Empty /> when no games were found', async () => {
-    const queryMocks = [
-      {
-        request: {
-          query: QUERY_GAMES,
-          variables: {
-            limit: 15
-          }
-        },
-        result: {
-          data: {
-            games: []
-          }
-        }
-      }
-    ]
-
     renderWithTheme(
-      <MockedProvider mocks={queryMocks} addTypename={false}>
+      <MockedProvider mocks={[emptyGamesMock]}>
         <Games filterItems={filterItemsMock as ItemProps[]} />
       </MockedProvider>
     )
 
     expect(await screen.findByTestId('Mock Empty')).toBeInTheDocument()
+  })
+
+  it('should render more games when show more is clicked', async () => {
+    renderWithTheme(
+      <MockedProvider mocks={[gamesMock, fetchMoreMock]} cache={apolloCache}>
+        <Games filterItems={filterItemsMock as ItemProps[]} />
+      </MockedProvider>
+    )
+
+    expect(await screen.findByText(/Sample Game/i)).toBeInTheDocument()
+
+    userEvent.click(screen.getByRole('button', { name: /show more/i }))
+    expect(await screen.findByText(/Fetch More Game/i)).toBeInTheDocument()
   })
 })
