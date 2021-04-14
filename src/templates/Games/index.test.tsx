@@ -1,12 +1,24 @@
+import userEvent from '@testing-library/user-event'
 import { screen } from '@testing-library/react'
+import { MockedProvider } from '@apollo/client/testing'
+import apolloCache from 'utils/apolloCache'
 
 import { renderWithTheme } from 'utils/tests/helpers'
 
-import { ItemProps } from 'components/ExploreSidebar'
-import gamesMock from 'components/GameCardSlider/data.mock'
+import { emptyGamesMock, fetchMoreMock, gamesMock } from './data.mock'
 import filterItemsMock from 'components/ExploreSidebar/data.mock'
+import { ItemProps } from 'components/ExploreSidebar'
 
 import Games from '.'
+
+jest.mock('next/link', () => {
+  return {
+    __esModule: true,
+    default: function Mock({ children }: { children: React.ReactNode }) {
+      return children
+    }
+  }
+})
 
 jest.mock('templates/Base', () => {
   return {
@@ -26,15 +38,6 @@ jest.mock('components/ExploreSidebar', () => {
   }
 })
 
-jest.mock('components/GameCard', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="Mock GameCard"></div>
-    }
-  }
-})
-
 jest.mock('components/Empty', () => {
   return {
     __esModule: true,
@@ -45,25 +48,41 @@ jest.mock('components/Empty', () => {
 })
 
 describe('<Games />', () => {
-  it('should render the sections', () => {
+  it('should render the sections', async () => {
     renderWithTheme(
-      <Games
-        games={[gamesMock[0]]}
-        filterItems={filterItemsMock as ItemProps[]}
-      />
+      <MockedProvider mocks={[gamesMock]}>
+        <Games filterItems={filterItemsMock as ItemProps[]} />
+      </MockedProvider>
     )
 
     expect(screen.getByTestId('Mock ExploreSidebar')).toBeInTheDocument()
-    expect(screen.getByTestId('Mock GameCard')).toBeInTheDocument()
+    expect(await screen.findByText(/Sample Game/i)).toBeInTheDocument()
 
     expect(
-      screen.getByRole('button', { name: /show more/i })
+      await screen.findByRole('button', { name: /show more/i })
     ).toBeInTheDocument()
   })
 
-  it('should render <Empty /> when no games were found', () => {
-    renderWithTheme(<Games filterItems={filterItemsMock as ItemProps[]} />)
+  it('should render <Empty /> when no games were found', async () => {
+    renderWithTheme(
+      <MockedProvider mocks={[emptyGamesMock]}>
+        <Games filterItems={filterItemsMock as ItemProps[]} />
+      </MockedProvider>
+    )
 
-    expect(screen.getByTestId('Mock Empty')).toBeInTheDocument()
+    expect(await screen.findByTestId('Mock Empty')).toBeInTheDocument()
+  })
+
+  it('should render more games when show more is clicked', async () => {
+    renderWithTheme(
+      <MockedProvider mocks={[gamesMock, fetchMoreMock]} cache={apolloCache}>
+        <Games filterItems={filterItemsMock as ItemProps[]} />
+      </MockedProvider>
+    )
+
+    expect(await screen.findByText(/Sample Game/i)).toBeInTheDocument()
+
+    userEvent.click(screen.getByRole('button', { name: /show more/i }))
+    expect(await screen.findByText(/Fetch More Game/i)).toBeInTheDocument()
   })
 })
