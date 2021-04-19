@@ -7,6 +7,17 @@ import CartList from '.'
 import gamesMock from './data.mock'
 
 describe('<CartList />', () => {
+  it('should render the loading', () => {
+    const cartProviderProps = {
+      ...CartContextDefaultValues,
+      loading: true
+    }
+
+    render(<CartList hasLink />, { cartProviderProps })
+
+    expect(screen.getByTitle(/loading/i)).toBeInTheDocument()
+  })
+
   it('should render the cart list', () => {
     const cartProviderProps = {
       ...CartContextDefaultValues,
