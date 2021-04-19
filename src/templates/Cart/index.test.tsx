@@ -1,9 +1,6 @@
-import { screen } from '@testing-library/react'
 import React from 'react'
+import { render, screen } from 'utils/test-utils'
 
-import { renderWithTheme } from 'utils/tests/helpers'
-
-import itemsMock from 'components/CartList/data.mock'
 import gamesMock from 'components/GameCardSlider/data.mock'
 import highlightMock from 'components/Highlight/data.mock'
 import cardsMock from 'components/PaymentOptions/data.mock'
@@ -12,8 +9,6 @@ import Cart from '.'
 
 const props = {
   cards: cardsMock,
-  items: itemsMock,
-  total: 'R$ 430,00',
   recommendedTitle: 'You may like these games',
   recommendedGames: gamesMock,
   recommendedHighlight: highlightMock
@@ -55,18 +50,9 @@ jest.mock('components/Showcase', () => {
   }
 })
 
-jest.mock('components/Empty', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="Mock Empty"></div>
-    }
-  }
-})
-
 describe('<Cart />', () => {
   it('should render the sections', () => {
-    renderWithTheme(<Cart {...props} />)
+    render(<Cart {...props} />)
 
     expect(
       screen.getByRole('heading', { name: /My cart/i })
@@ -75,11 +61,5 @@ describe('<Cart />', () => {
     expect(screen.getByTestId('Mock PaymentOptions')).toBeInTheDocument()
     expect(screen.getByTestId('Mock Showcase')).toBeInTheDocument()
     expect(screen.queryByTestId('Mock Empty')).not.toBeInTheDocument()
-  })
-
-  it('should render <Empty /> if there are no items in the cart', () => {
-    renderWithTheme(<Cart {...props} items={[]} />)
-
-    expect(screen.getByTestId('Mock Empty')).toBeInTheDocument()
   })
 })
