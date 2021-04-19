@@ -4,7 +4,7 @@ import {
   QueryHome_sections_newGames_highlight
 } from 'graphql/generated/QueryHome'
 
-import { bannersMapper, gamesMapper, highlightMapper } from '.'
+import { bannersMapper, cartMapper, gamesMapper, highlightMapper } from '.'
 
 describe('bannersMapper()', () => {
   it('should map banners data to the right format', () => {
@@ -99,5 +99,31 @@ describe('highlighMapper()', () => {
       buttonLabel: 'button label',
       buttonLink: 'button link'
     })
+  })
+})
+
+describe('cartMapper()', () => {
+  it('should return empty object if no games', () => {
+    expect(cartMapper(undefined)).toStrictEqual([])
+  })
+
+  it('should map cart games data to the right format', () => {
+    const game = {
+      id: '1',
+      name: 'Game name',
+      cover: {
+        url: '/cover.jpg'
+      },
+      price: 100
+    } as QueryGames_games
+
+    expect(cartMapper([game])).toStrictEqual([
+      {
+        id: '1',
+        title: 'Game name',
+        img: 'http://localhost:1337/cover.jpg',
+        price: '$100.00'
+      }
+    ])
   })
 })
