@@ -28,9 +28,11 @@ const CartList = ({ hasLink = false }: CartListProps) => {
     <S.Container isEmpty={!items.length}>
       {items.length ? (
         <>
-          {items.map((item) => (
-            <GameItem key={item.title} {...item} />
-          ))}
+          <S.GamesList>
+            {items.map((item) => (
+              <GameItem key={item.title} {...item} />
+            ))}
+          </S.GamesList>
 
           <S.Footer>
             {!hasLink && <span>Total</span>}
