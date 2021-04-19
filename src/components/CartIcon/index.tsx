@@ -1,16 +1,17 @@
 import { ShoppingCart } from '@styled-icons/material-outlined'
 
+import { useCart } from 'hooks/use-cart'
+
 import * as S from './styles'
 
-export type CartIconProps = {
-  quantity?: number
+const CartIcon = () => {
+  const { quantity } = useCart()
+  return (
+    <S.Container>
+      {quantity > 0 && <S.Badge aria-label="Cart Items">{quantity}</S.Badge>}
+      <ShoppingCart aria-label="Shopping Cart" />
+    </S.Container>
+  )
 }
-
-const CartIcon = ({ quantity = 0 }: CartIconProps) => (
-  <S.Container>
-    {quantity > 0 && <S.Badge aria-label="Cart Items">{quantity}</S.Badge>}
-    <ShoppingCart aria-label="Shopping Cart" />
-  </S.Container>
-)
 
 export default CartIcon

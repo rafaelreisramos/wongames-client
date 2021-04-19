@@ -134,6 +134,7 @@ exports[`<CartList /> should render the cart list 1`] = `
 >
   <div
     class="c1"
+    id="1"
   >
     <div
       class="c2"
@@ -164,6 +165,7 @@ exports[`<CartList /> should render the cart list 1`] = `
   </div>
   <div
     class="c1"
+    id="2"
   >
     <div
       class="c2"
