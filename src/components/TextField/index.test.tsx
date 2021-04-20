@@ -38,9 +38,11 @@ describe('<TextField />', () => {
   })
 
   it(`should change it's value when typing`, async () => {
-    const onInput = jest.fn()
+    const onInputChange = jest.fn()
 
-    render(<TextField onInput={onInput} label="label" name="field" />)
+    render(
+      <TextField onInputChange={onInputChange} label="label" name="field" />
+    )
 
     const input = screen.getByRole('textbox')
     const text = 'Input text'
@@ -48,16 +50,23 @@ describe('<TextField />', () => {
     userEvent.type(input, text)
     await waitFor(() => {
       expect(input).toHaveValue(text)
-      expect(onInput).toHaveBeenCalledTimes(text.length)
+      expect(onInputChange).toHaveBeenCalledTimes(text.length)
     })
 
-    expect(onInput).toHaveBeenCalledWith(text)
+    expect(onInputChange).toHaveBeenCalledWith(text)
   })
 
   it(`should not change it's value when disabled`, async () => {
-    const onInput = jest.fn()
+    const onInputChange = jest.fn()
 
-    render(<TextField onInput={onInput} label="label" name="field" disabled />)
+    render(
+      <TextField
+        onInputChange={onInputChange}
+        label="label"
+        name="field"
+        disabled
+      />
+    )
 
     const input = screen.getByRole('textbox')
     expect(input).toBeDisabled()
@@ -69,7 +78,7 @@ describe('<TextField />', () => {
       expect(input).not.toHaveValue(text)
     })
 
-    expect(onInput).not.toHaveBeenCalledWith()
+    expect(onInputChange).not.toHaveBeenCalledWith()
   })
 
   it('should not be accessible with tab when disabled', () => {
