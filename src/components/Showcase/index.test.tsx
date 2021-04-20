@@ -1,7 +1,5 @@
 import 'matchMediaMock'
-import { screen } from '@testing-library/react'
-
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 import highlightMock from 'components/Highlight/data.mock'
 import gamesMock from 'components/GameCardSlider/data.mock'
@@ -16,7 +14,7 @@ const props = {
 
 describe('<Showcase />', () => {
   it('should render Showcase with title, highligh and games', () => {
-    renderWithTheme(<Showcase {...props} />)
+    render(<Showcase {...props} />)
 
     screen.getByRole('heading', { name: /Most Populars/i })
     screen.getByRole('heading', { name: highlightMock.title })
@@ -24,9 +22,7 @@ describe('<Showcase />', () => {
   })
 
   it('should render Showcase without title', () => {
-    renderWithTheme(
-      <Showcase highlight={props.highlight} games={props.games} />
-    )
+    render(<Showcase highlight={props.highlight} games={props.games} />)
 
     expect(
       screen.queryByRole('heading', { name: /Most Populars/i })
@@ -37,7 +33,7 @@ describe('<Showcase />', () => {
   })
 
   it('should render Showcase without highlight', () => {
-    renderWithTheme(<Showcase title={props.title} games={props.games} />)
+    render(<Showcase title={props.title} games={props.games} />)
 
     expect(
       screen.queryByRole('heading', { name: highlightMock.title })
@@ -48,9 +44,7 @@ describe('<Showcase />', () => {
   })
 
   it('should render Showcase without games', () => {
-    renderWithTheme(
-      <Showcase title={props.title} highlight={props.highlight} />
-    )
+    render(<Showcase title={props.title} highlight={props.highlight} />)
 
     expect(
       screen.queryByRole('heading', { name: gamesMock[0].title })

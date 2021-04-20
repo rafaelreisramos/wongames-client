@@ -1,12 +1,10 @@
-import { screen } from '@testing-library/react'
-
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 import Heading from '.'
 
 describe('<Heading />', () => {
   it('should render a white heading by default', () => {
-    renderWithTheme(<Heading>Most Populars</Heading>)
+    render(<Heading>Most Populars</Heading>)
 
     expect(
       screen.getByRole('heading', { name: /most populars/i })
@@ -14,7 +12,7 @@ describe('<Heading />', () => {
   })
 
   it('should render a black heading when color is passed', () => {
-    renderWithTheme(<Heading color="black">Most Populars</Heading>)
+    render(<Heading color="black">Most Populars</Heading>)
 
     expect(
       screen.getByRole('heading', { name: /most populars/i })
@@ -22,7 +20,7 @@ describe('<Heading />', () => {
   })
 
   it('should render a heading with a left line', () => {
-    renderWithTheme(<Heading lineLeft>Most Populars</Heading>)
+    render(<Heading lineLeft>Most Populars</Heading>)
 
     expect(
       screen.getByRole('heading', { name: /most populars/i })
@@ -30,7 +28,7 @@ describe('<Heading />', () => {
   })
 
   it('should render a heading with a bottom line', () => {
-    renderWithTheme(<Heading lineBottom>Most Populars</Heading>)
+    render(<Heading lineBottom>Most Populars</Heading>)
 
     expect(
       screen.getByRole('heading', { name: /most populars/i })
@@ -40,7 +38,7 @@ describe('<Heading />', () => {
   })
 
   it('should render a heading with a small size', () => {
-    renderWithTheme(
+    render(
       <Heading size="small" lineLeft>
         Most Populars
       </Heading>
@@ -58,7 +56,7 @@ describe('<Heading />', () => {
   })
 
   it('should render a heading with a huge size', () => {
-    renderWithTheme(
+    render(
       <Heading size="huge" lineLeft>
         Most Populars
       </Heading>
@@ -70,7 +68,7 @@ describe('<Heading />', () => {
   })
 
   it('should render a heading with a primary line color', () => {
-    renderWithTheme(
+    render(
       <Heading lineColor="primary" lineLeft lineBottom>
         Most Populars
       </Heading>
@@ -84,7 +82,7 @@ describe('<Heading />', () => {
   })
 
   it('should render a heading with a secondary line color', () => {
-    renderWithTheme(
+    render(
       <Heading lineColor="secondary" lineLeft lineBottom>
         Most Populars
       </Heading>

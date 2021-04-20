@@ -1,7 +1,5 @@
-import { screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from 'utils/test-utils'
 import userEvent from '@testing-library/user-event'
-
-import { renderWithTheme } from 'utils/tests/helpers'
 
 import PaymentOptions from '.'
 
@@ -9,9 +7,7 @@ import cardsMock from './data.mock'
 
 describe('<PaymentOptions />', () => {
   it('should render the saved card options and the new card button', () => {
-    renderWithTheme(
-      <PaymentOptions cards={cardsMock} handlePayment={jest.fn} />
-    )
+    render(<PaymentOptions cards={cardsMock} handlePayment={jest.fn} />)
 
     expect(screen.getByText(/1234/)).toBeInTheDocument()
     expect(screen.getByText(/2345/)).toBeInTheDocument()
@@ -19,9 +15,7 @@ describe('<PaymentOptions />', () => {
   })
 
   it('should select the card when it is clicked', async () => {
-    renderWithTheme(
-      <PaymentOptions cards={cardsMock} handlePayment={jest.fn} />
-    )
+    render(<PaymentOptions cards={cardsMock} handlePayment={jest.fn} />)
 
     userEvent.click(screen.getByText(/1234/))
     await waitFor(() =>
@@ -31,9 +25,7 @@ describe('<PaymentOptions />', () => {
 
   it('should not call handlePayment when button is disabled', () => {
     const handlePayment = jest.fn()
-    renderWithTheme(
-      <PaymentOptions cards={cardsMock} handlePayment={handlePayment} />
-    )
+    render(<PaymentOptions cards={cardsMock} handlePayment={handlePayment} />)
 
     userEvent.click(screen.getByRole('button', { name: /buy now/i }))
     expect(handlePayment).not.toHaveBeenCalled()
@@ -41,9 +33,7 @@ describe('<PaymentOptions />', () => {
 
   it('should call handlePayment if the card is selected', async () => {
     const handlePayment = jest.fn()
-    renderWithTheme(
-      <PaymentOptions cards={cardsMock} handlePayment={handlePayment} />
-    )
+    render(<PaymentOptions cards={cardsMock} handlePayment={handlePayment} />)
 
     userEvent.click(screen.getByText(/1234/))
     userEvent.click(screen.getByRole('button', { name: /buy now/i }))

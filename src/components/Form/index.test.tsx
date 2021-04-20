@@ -1,10 +1,10 @@
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render } from 'utils/test-utils'
 
 import { FormContainer, FormLink } from '.'
 
 describe('<Form />', () => {
   it('should render the form', () => {
-    const { container } = renderWithTheme(
+    const { container } = render(
       <FormContainer>
         <FormLink>
           Link <a href="#">link</a>

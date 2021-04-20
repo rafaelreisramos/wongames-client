@@ -1,6 +1,5 @@
-import { screen } from '@testing-library/react'
+import { render, screen } from 'utils/test-utils'
 
-import { renderWithTheme } from 'utils/tests/helpers'
 import item from './data.mock'
 
 import Highlight from '.'
@@ -11,7 +10,7 @@ const props = { ...item }
 
 describe('<Highlight />', () => {
   it('should render headings and button', () => {
-    const { container } = renderWithTheme(<Highlight {...props} />)
+    const { container } = render(<Highlight {...props} />)
 
     expect(
       screen.getByRole('heading', { name: /Red Dead it's back/i })
@@ -27,7 +26,7 @@ describe('<Highlight />', () => {
   })
 
   it('should render background image', () => {
-    const { container } = renderWithTheme(<Highlight {...props} />)
+    const { container } = render(<Highlight {...props} />)
 
     expect(container.firstChild).toHaveStyle({
       backgroundImage: `url(${props.backgroundImage})`
@@ -35,7 +34,7 @@ describe('<Highlight />', () => {
   })
 
   it('should render a float image', () => {
-    renderWithTheme(<Highlight {...props} floatImage="/float-image.png" />)
+    render(<Highlight {...props} floatImage="/float-image.png" />)
 
     expect(screen.getByRole('img', { name: props.title })).toHaveAttribute(
       'src',
@@ -44,7 +43,7 @@ describe('<Highlight />', () => {
   })
 
   it('should render align right by default', () => {
-    const { container } = renderWithTheme(<Highlight {...props} />)
+    const { container } = render(<Highlight {...props} />)
 
     expect(container.firstChild).toHaveStyleRule('text-align', 'right', {
       modifier: `${S.Content}`
@@ -57,9 +56,7 @@ describe('<Highlight />', () => {
   })
 
   it('should render align left if alignment is passed', () => {
-    const { container } = renderWithTheme(
-      <Highlight {...props} alignment="left" />
-    )
+    const { container } = render(<Highlight {...props} alignment="left" />)
 
     expect(container.firstChild).toHaveStyleRule('text-align', 'left', {
       modifier: `${S.Content}`

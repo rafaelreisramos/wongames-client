@@ -1,13 +1,11 @@
-import { screen } from '@testing-library/react'
+import { render, screen } from 'utils/test-utils'
 import userEvent from '@testing-library/user-event'
-
-import { renderWithTheme } from 'utils/tests/helpers'
 
 import UserDropdown from '.'
 
 describe('<UserDropdown />', () => {
   beforeEach(() => {
-    renderWithTheme(<UserDropdown username="John Doe" />)
+    render(<UserDropdown username="John Doe" />)
   })
 
   it('should render the username', () => {

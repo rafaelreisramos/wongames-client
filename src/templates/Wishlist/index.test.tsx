@@ -1,6 +1,5 @@
 import 'matchMediaMock'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 import gamesMock from 'components/GameCardSlider/data.mock'
 import highlightMock from 'components/Highlight/data.mock'
@@ -43,7 +42,7 @@ jest.mock('components/Footer', () => {
 
 describe('<Wishlist />', () => {
   it('should render the template with components', () => {
-    renderWithTheme(<Wishlist {...props} />)
+    render(<Wishlist {...props} />)
 
     expect(screen.getByTestId('Mock Menu')).toBeInTheDocument()
     expect(
@@ -58,7 +57,7 @@ describe('<Wishlist />', () => {
   })
 
   it('should render empty when there are no games', () => {
-    renderWithTheme(
+    render(
       <Wishlist
         recommendedTitle="You may like these games"
         recommendedGames={gamesMock}

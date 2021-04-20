@@ -1,13 +1,11 @@
-import { screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from 'utils/test-utils'
 import userEvent from '@testing-library/user-event'
-
-import { renderWithTheme } from 'utils/tests/helpers'
 
 import Checkbox from '.'
 
 describe('<Checkbox />', () => {
   it('should render with label', () => {
-    renderWithTheme(<Checkbox label="checkbox label" labelFor="check" />)
+    render(<Checkbox label="checkbox label" labelFor="check" />)
 
     expect(screen.getByRole('checkbox')).toBeInTheDocument()
     expect(screen.getByLabelText(/checkbox label/i)).toBeInTheDocument()
@@ -16,13 +14,13 @@ describe('<Checkbox />', () => {
   })
 
   it('should render without label', () => {
-    renderWithTheme(<Checkbox />)
+    render(<Checkbox />)
 
     expect(screen.queryByLabelText('checkbox')).not.toBeInTheDocument()
   })
 
   it('should render with a black label', () => {
-    renderWithTheme(
+    render(
       <Checkbox label="checkbox label" labelFor="check" labelColor="black" />
     )
 
@@ -34,7 +32,7 @@ describe('<Checkbox />', () => {
   it('should dispatch onCheck(true) when status changes', async () => {
     const onCheck = jest.fn()
 
-    renderWithTheme(<Checkbox label="ckeckbox label" onCheck={onCheck} />)
+    render(<Checkbox label="ckeckbox label" onCheck={onCheck} />)
 
     expect(onCheck).not.toHaveBeenCalled()
 
@@ -49,9 +47,7 @@ describe('<Checkbox />', () => {
   it('should dispatch onCheck(false) when status changes', async () => {
     const onCheck = jest.fn()
 
-    renderWithTheme(
-      <Checkbox label="ckeckbox label" onCheck={onCheck} isChecked />
-    )
+    render(<Checkbox label="ckeckbox label" onCheck={onCheck} isChecked />)
 
     expect(onCheck).not.toHaveBeenCalled()
 
@@ -64,7 +60,7 @@ describe('<Checkbox />', () => {
   })
 
   it('should be accessible with tab', async () => {
-    renderWithTheme(<Checkbox label="checkbox label" labelFor="check" />)
+    render(<Checkbox label="checkbox label" labelFor="check" />)
 
     expect(document.body).toHaveFocus()
 

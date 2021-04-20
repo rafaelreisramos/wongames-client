@@ -1,12 +1,10 @@
-import { screen } from '@testing-library/react'
-
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 import Footer from '.'
 
 describe('<Footer />', () => {
   it('should render the black logo, 4 columns topics and copyright', () => {
-    const { container } = renderWithTheme(<Footer />)
+    const { container } = render(<Footer />)
 
     expect(screen.getByLabelText(/Won Games/i).parentElement).toHaveStyle({
       color: '#030517'

@@ -1,6 +1,5 @@
-import { screen } from '@testing-library/react'
+import { render, screen } from 'utils/test-utils'
 
-import { renderWithTheme } from 'utils/tests/helpers'
 import item from './data.mock'
 
 import Banner from '.'
@@ -9,7 +8,7 @@ const props = { ...item }
 
 describe('<Banner />', () => {
   it('should render the banner', () => {
-    const { container } = renderWithTheme(<Banner {...props} />)
+    const { container } = render(<Banner {...props} />)
 
     expect(screen.getByRole('img', { name: /Defy death/i })).toBeInTheDocument()
 
@@ -25,7 +24,7 @@ describe('<Banner />', () => {
   })
 
   it('should render a ribbon', () => {
-    renderWithTheme(<Banner {...props} ribbon="Ribbon" />)
+    render(<Banner {...props} ribbon="Ribbon" />)
 
     const ribbon = screen.getByText(/Ribbon/i)
 
@@ -39,7 +38,7 @@ describe('<Banner />', () => {
   })
 
   it('should render a small ribbon with a secondary color', () => {
-    renderWithTheme(
+    render(
       <Banner
         {...props}
         ribbon="Ribbon"
