@@ -1,7 +1,6 @@
-import { screen } from '@testing-library/react'
+import { screen, render } from 'utils/test-utils'
 import userEvent from '@testing-library/user-event'
 
-import { renderWithTheme } from 'utils/tests/helpers'
 import item from './data.mock'
 
 import GameCard from '.'
@@ -10,7 +9,7 @@ const { promotionalPrice, ...props } = { ...item }
 
 describe('<GameCard />', () => {
   it('should render correctly', () => {
-    const { container } = renderWithTheme(<GameCard {...props} />)
+    const { container } = render(<GameCard {...props} />)
 
     expect(
       screen.getByRole('heading', { name: props.title })
@@ -32,7 +31,7 @@ describe('<GameCard />', () => {
   })
 
   it('should render price in label', () => {
-    renderWithTheme(<GameCard {...props} />)
+    render(<GameCard {...props} />)
 
     const price = screen.getByText(/\$235\.00/)
 
@@ -41,7 +40,7 @@ describe('<GameCard />', () => {
   })
 
   it('should render a line-through in price when promotional', () => {
-    renderWithTheme(<GameCard {...props} promotionalPrice={promotionalPrice} />)
+    render(<GameCard {...props} promotionalPrice={promotionalPrice} />)
 
     expect(screen.getByText(/\$235\.00/)).toHaveStyle({
       textDecoration: 'line-through'
@@ -52,7 +51,7 @@ describe('<GameCard />', () => {
   })
 
   it('should render a filled Favorite icon when favorite is true', () => {
-    renderWithTheme(<GameCard {...props} favorite />)
+    render(<GameCard {...props} favorite />)
 
     expect(screen.getByLabelText(/Remove from Wishlist/i)).toBeInTheDocument()
   })
@@ -60,7 +59,7 @@ describe('<GameCard />', () => {
   it('should call onFavorite method when favorite is clicked', () => {
     const onFavorite = jest.fn()
 
-    renderWithTheme(<GameCard {...props} favorite onFavorite={onFavorite} />)
+    render(<GameCard {...props} favorite onFavorite={onFavorite} />)
 
     userEvent.click(screen.getAllByRole('button')[0])
 
@@ -68,7 +67,7 @@ describe('<GameCard />', () => {
   })
 
   it('should render a small ribbon with a secondary color', () => {
-    renderWithTheme(
+    render(
       <GameCard
         {...props}
         ribbon="Ribbon"
