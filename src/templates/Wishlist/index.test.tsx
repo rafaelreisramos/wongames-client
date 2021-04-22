@@ -13,14 +13,12 @@ const props: WhishlistTemplateProps = {
   recommendedGames: [gamesMock[0]]
 }
 
-jest.mock('components/Menu', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="Mock Menu"></div>
-    }
+jest.mock('templates/Base', () => ({
+  __esModule: true,
+  default: function Mock({ children }: { children: React.ReactNode }) {
+    return <div data-testid="Mock Base">{children}</div>
   }
-})
+}))
 
 jest.mock('components/Showcase', () => {
   return {
@@ -31,27 +29,16 @@ jest.mock('components/Showcase', () => {
   }
 })
 
-jest.mock('components/Footer', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="Mock Footer"></div>
-    }
-  }
-})
-
 describe('<Wishlist />', () => {
   it('should render the template with components', () => {
     render(<Wishlist {...props} />)
 
-    expect(screen.getByTestId('Mock Menu')).toBeInTheDocument()
     expect(
       screen.getByRole('heading', {
         name: /wishlist/i
       })
     ).toBeInTheDocument()
     expect(screen.getAllByTestId('Mock Showcase')).toHaveLength(1)
-    expect(screen.getByTestId('Mock Footer')).toBeInTheDocument()
 
     expect(screen.getAllByText(/population zero/i)).toHaveLength(6)
   })

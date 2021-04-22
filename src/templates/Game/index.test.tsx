@@ -23,14 +23,12 @@ const props: GameTemplateProps = {
   recommendedGames: [gamesMock[0]]
 }
 
-jest.mock('components/Menu', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="Mock Menu"></div>
-    }
+jest.mock('templates/Base', () => ({
+  __esModule: true,
+  default: function Mock({ children }: { children: React.ReactNode }) {
+    return <div data-testid="Mock Base">{children}</div>
   }
-})
+}))
 
 jest.mock('components/Gallery', () => {
   return {
@@ -68,26 +66,15 @@ jest.mock('components/Showcase', () => {
   }
 })
 
-jest.mock('components/Footer', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="Mock Footer"></div>
-    }
-  }
-})
-
 describe('<Game />', () => {
   it('should render the template with components', () => {
     render(<Game {...props} />)
 
-    expect(screen.getByTestId('Mock Menu')).toBeInTheDocument()
     expect(screen.getByTestId('Mock GameInfo')).toBeInTheDocument()
     expect(screen.getByTestId('Mock Gallery')).toBeInTheDocument()
     expect(screen.getByText(/custom html/i)).toBeInTheDocument()
     expect(screen.getByTestId('Mock GameDetails')).toBeInTheDocument()
     expect(screen.getAllByTestId('Mock Showcase')).toHaveLength(2)
-    expect(screen.getByTestId('Mock Footer')).toBeInTheDocument()
   })
 
   it('should render cover image', () => {
