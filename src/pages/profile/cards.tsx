@@ -1,3 +1,7 @@
+import { GetServerSidePropsContext } from 'next'
+
+import protectedRoute from 'utils/protectedRoute'
+
 import Profile from 'templates/Profile'
 import CardsList, { CardsListProps } from 'components/CardsList'
 
@@ -11,10 +15,13 @@ export default function ProfileCards({ cards }: CardsListProps) {
   )
 }
 
-export function getServerSideProps() {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await protectedRoute(context)
+
   return {
     props: {
-      cards: cardsMock
+      cards: cardsMock,
+      session
     }
   }
 }
