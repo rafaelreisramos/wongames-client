@@ -9,7 +9,7 @@ import { UsersPermissionsRegisterInput } from 'graphql/generated/globalTypes'
 
 import Button from 'components/Button'
 import TextField from 'components/TextField'
-import { FormContainer, FormLink } from 'components/Form'
+import { FormContainer, FormLink, FormLoading } from 'components/Form'
 
 const FormSignUp = () => {
   const [values, setValues] = useState<UsersPermissionsRegisterInput>({
@@ -18,7 +18,7 @@ const FormSignUp = () => {
     password: ''
   })
 
-  const [createUser, { error }] = useMutation(MUTATION_REGISTER, {
+  const [createUser, { loading, error }] = useMutation(MUTATION_REGISTER, {
     onError: (err) => console.log(err),
     onCompleted: () => {
       !error &&
@@ -82,8 +82,8 @@ const FormSignUp = () => {
           onInputChange={(v) => handleInput('confirm-password', v)}
           icon={<Lock />}
         />
-        <Button type="submit" size="large" fullWidth>
-          Sign up now
+        <Button type="submit" size="large" fullWidth disabled={loading}>
+          {loading ? <FormLoading /> : <span>Sign up now</span>}
         </Button>
 
         <FormLink>
