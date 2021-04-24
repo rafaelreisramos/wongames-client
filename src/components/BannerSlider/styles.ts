@@ -41,6 +41,10 @@ export const Container = styled.section`
         margin: 0 auto;
       }
 
+      .slick-track {
+        max-height: 58rem;
+      }
+
       .slick-dots {
         flex-direction: column;
         position: absolute;
