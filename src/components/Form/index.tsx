@@ -16,6 +16,21 @@ export const FormContainer = styled.div`
   `}
 `
 
+export const FormError = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${theme.colors.red};
+    font-size: ${theme.font.sizes.small};
+
+    svg {
+      margin-right: ${theme.spacings.xxsmall};
+      width: 1.6rem;
+    }
+  `}
+`
+
 export const FormLoading = styled.img.attrs(() => ({
   src: '/img/dots.svg',
   alt: 'Waiting...'

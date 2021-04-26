@@ -31,13 +31,15 @@ function getFieldErrors(objError: Joi.ValidationResult) {
   return errors
 }
 
-export function signUpValidate(values: UsersPermissionsRegisterInput) {
+export type SignUpValues = UsersPermissionsRegisterInput
+
+export function signUpValidate(values: SignUpValues) {
   const schema = Joi.object(fieldsValidations)
 
   return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }
 
-type SignInValues = Omit<UsersPermissionsRegisterInput, 'username'>
+export type SignInValues = Omit<UsersPermissionsRegisterInput, 'username'>
 
 export function signInValidate(values: SignInValues) {
   const { email, password } = fieldsValidations

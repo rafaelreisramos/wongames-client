@@ -1,25 +1,42 @@
 import Link from 'next/link'
 import { FormEvent, useState } from 'react'
 import { signIn } from 'next-auth/client'
-import { AccountCircle, Email, Lock } from '@styled-icons/material-outlined'
+import {
+  AccountCircle,
+  Email,
+  ErrorOutline,
+  Lock
+} from '@styled-icons/material-outlined'
 import { useMutation } from '@apollo/client'
 
+import { FieldErrors, signUpValidate, SignUpValues } from 'utils/validations'
+
 import { MUTATION_REGISTER } from 'graphql/mutations/register'
-import { UsersPermissionsRegisterInput } from 'graphql/generated/globalTypes'
 
 import Button from 'components/Button'
 import TextField from 'components/TextField'
-import { FormContainer, FormLink, FormLoading } from 'components/Form'
+import {
+  FormContainer,
+  FormError,
+  FormLink,
+  FormLoading
+} from 'components/Form'
 
 const FormSignUp = () => {
-  const [values, setValues] = useState<UsersPermissionsRegisterInput>({
+  const [values, setValues] = useState<SignUpValues>({
     username: '',
     email: '',
     password: ''
   })
+  const [fieldError, setFieldError] = useState<FieldErrors>({})
+  const [formError, setFormError] = useState('')
 
   const [createUser, { loading, error }] = useMutation(MUTATION_REGISTER, {
-    onError: (err) => console.log(err),
+    onError: (err) =>
+      setFormError(
+        err?.graphQLErrors[0]?.extensions?.exception.data.message[0].messages[0]
+          .message
+      ),
     onCompleted: () => {
       !error &&
         signIn('credentials', {
@@ -34,8 +51,20 @@ const FormSignUp = () => {
     setValues((s) => ({ ...s, [field]: value }))
   }
 
+  const handleFocus = (field: string) => {
+    setFieldError((s) => ({ ...s, [field]: '' }))
+  }
+
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
+    setFormError('')
+
+    const errors = signUpValidate(values)
+
+    if (Object.keys(errors).length) {
+      setFieldError(errors)
+      return
+    }
 
     createUser({
       variables: {
@@ -49,38 +78,52 @@ const FormSignUp = () => {
   }
 
   return (
-    <FormContainer onSubmit={handleSubmit}>
-      <form>
+    <FormContainer>
+      {!!formError && (
+        <FormError>
+          <ErrorOutline />
+          {formError}
+        </FormError>
+      )}
+      <form onSubmit={handleSubmit}>
         <TextField
           name="username"
           type="text"
           placeholder="Username"
+          error={fieldError?.username}
           onInputChange={(v) => handleInput('username', v)}
           icon={<AccountCircle />}
+          onFocus={() => handleFocus('username')}
         />
 
         <TextField
           name="email"
           type="email"
           placeholder="E-mail"
+          error={fieldError?.email}
           onInputChange={(v) => handleInput('email', v)}
           icon={<Email />}
+          onFocus={() => handleFocus('email')}
         />
 
         <TextField
           name="password"
           type="password"
           placeholder="Password"
+          error={fieldError?.password}
           onInputChange={(v) => handleInput('password', v)}
           icon={<Lock />}
+          onFocus={() => handleFocus('password')}
         />
 
         <TextField
-          name="confirm-password"
+          name="confirm_password"
           type="password"
           placeholder="Confirm password"
-          onInputChange={(v) => handleInput('confirm-password', v)}
+          error={fieldError?.confirm_password}
+          onInputChange={(v) => handleInput('confirm_password', v)}
           icon={<Lock />}
+          onFocus={() => handleFocus('confirm_password')}
         />
         <Button type="submit" size="large" fullWidth disabled={loading}>
           {loading ? <FormLoading /> : <span>Sign up now</span>}
