@@ -30,3 +30,12 @@ export const Form = styled.form`
     `}
   `}
 `
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  ${media.greaterThan('medium')`
+      grid-column: 2;
+  `}
+`

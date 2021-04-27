@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import Button from 'components/Button'
 import Heading from 'components/Heading'
 import TextField from 'components/TextField'
@@ -32,21 +34,15 @@ const FormProfile = ({ username, email }: FormProfileProps) => (
         disabled
       />
 
-      <TextField
-        type="password"
-        name="password"
-        label="Password"
-        placeholder="Type your password"
-      />
+      <S.ButtonsContainer>
+        <Link href={`/forgot-password?email=${email}`} passHref>
+          <Button minimal size="medium" as="a">
+            Reset password
+          </Button>
+        </Link>
 
-      <TextField
-        type="password"
-        name="new_password"
-        label="New Password"
-        placeholder="New password"
-      />
-
-      <Button size="large">Save</Button>
+        <Button size="medium">Save</Button>
+      </S.ButtonsContainer>
     </S.Form>
   </S.Container>
 )
