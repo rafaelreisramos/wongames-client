@@ -26,7 +26,22 @@ export const FormError = styled.div`
 
     svg {
       margin-right: ${theme.spacings.xxsmall};
-      width: 1.6rem;
+      width: 2.4rem;
+    }
+  `}
+`
+
+export const FormSuccess = styled.p`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${theme.colors.secondary};
+    font-size: ${theme.font.sizes.small};
+
+    svg {
+      margin-right: ${theme.spacings.xxsmall};
+      width: 2.4rem;
     }
   `}
 `
