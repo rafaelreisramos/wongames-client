@@ -11,10 +11,10 @@ function createApolloClient(session?: Session | null) {
     uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`
   })
 
-  const authLink = setContext((_, { headers }) => {
-    const authorization = session?.accessToken
-      ? `Bearer ${session.accessToken}`
-      : ''
+  const authLink = setContext((_, { headers, session: clientSession }) => {
+    const accessToken = session?.accessToken || clientSession?.accessToken || ''
+    const authorization = accessToken ? `Bearer ${accessToken}` : ''
+
     return { headers: { ...headers, authorization } }
   })
 
