@@ -108,7 +108,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
         input: {
           where: { id: wishlistId },
           data: {
-            games: [...wishlistIds.filter((gameId: string) => gameId !== id)]
+            games: wishlistIds.filter((gameId: string) => gameId !== id)
           }
         }
       }
