@@ -1,6 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<GameInfo /> should render headind, description and price 1`] = `
+exports[`<GameInfo /> should render heading, description and price 1`] = `
+.c1 {
+  color: #030517;
+  position: relative;
+  margin-bottom: 3.2rem;
+  font-size: 2.0rem;
+}
+
+.c1::after {
+  position: absolute;
+  left: 0;
+  bottom: -0.7rem;
+  content: '';
+  width: 5rem;
+  border-bottom: 0.5rem solid #f231a5;
+}
+
+.c3 {
+  position: absolute;
+  top: 1.6rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #fafafa;
+  font-weight: 600;
+  background-color: #3cd3c1;
+  font-size: 1.4rem;
+  padding: 0 2.4rem;
+  height: 3.6rem;
+  right: -2rem;
+}
+
+.c3::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  border-style: solid;
+  border-left-width: 0rem;
+  border-bottom-width: 1rem;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.c3::before {
+  border-top-color: #1f8a7d;
+}
+
+.c3::before {
+  top: 3.6rem;
+  border-top-width: 1rem;
+  border-right-width: 2rem;
+}
+
 .c7 {
   display: inline-block;
   vertical-align: middle;
@@ -85,63 +142,6 @@ exports[`<GameInfo /> should render headind, description and price 1`] = `
 
 .c8:hover {
   color: #e20e8d;
-}
-
-.c1 {
-  color: #030517;
-  position: relative;
-  margin-bottom: 3.2rem;
-  font-size: 2.0rem;
-}
-
-.c1::after {
-  position: absolute;
-  left: 0;
-  bottom: -0.7rem;
-  content: '';
-  width: 5rem;
-  border-bottom: 0.5rem solid #f231a5;
-}
-
-.c3 {
-  position: absolute;
-  top: 1.6rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  color: #fafafa;
-  font-weight: 600;
-  background-color: #3cd3c1;
-  font-size: 1.4rem;
-  padding: 0 2.4rem;
-  height: 3.6rem;
-  right: -2rem;
-}
-
-.c3::before {
-  content: '';
-  position: absolute;
-  right: 0;
-  border-style: solid;
-  border-left-width: 0rem;
-  border-bottom-width: 1rem;
-  border-right-color: transparent;
-  border-bottom-color: transparent;
-}
-
-.c3::before {
-  border-top-color: #1f8a7d;
-}
-
-.c3::before {
-  top: 3.6rem;
-  border-top-width: 1rem;
-  border-right-width: 2rem;
 }
 
 .c0 {
@@ -276,6 +276,7 @@ exports[`<GameInfo /> should render headind, description and price 1`] = `
     >
       <svg
         aria-hidden="true"
+        aria-label="Add to Wishlist"
         class="c7"
         fill="currentColor"
         focusable="false"
@@ -291,7 +292,7 @@ exports[`<GameInfo /> should render headind, description and price 1`] = `
         />
       </svg>
       <span>
-        Whishlist
+        Add to Wishlist
       </span>
     </button>
   </div>
