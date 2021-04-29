@@ -1,5 +1,5 @@
+import 'session.mock'
 import { screen, render } from 'utils/test-utils'
-import userEvent from '@testing-library/user-event'
 
 import item from './data.mock'
 
@@ -48,22 +48,6 @@ describe('<GameCard />', () => {
     expect(screen.getByText(/\$195\.00/i)).toHaveStyle({
       backgroundColor: '#3cd3c1'
     })
-  })
-
-  it('should render a filled Favorite icon when favorite is true', () => {
-    render(<GameCard {...props} favorite />)
-
-    expect(screen.getByLabelText(/Remove from Wishlist/i)).toBeInTheDocument()
-  })
-
-  it('should call onFavorite method when favorite is clicked', () => {
-    const onFavorite = jest.fn()
-
-    render(<GameCard {...props} favorite onFavorite={onFavorite} />)
-
-    userEvent.click(screen.getAllByRole('button')[0])
-
-    expect(onFavorite).toBeCalled()
   })
 
   it('should render a small ribbon with a secondary color', () => {
