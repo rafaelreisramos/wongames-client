@@ -103,7 +103,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
   }
 
   const removeFromWishlist = (id: string) => {
-    updateWishlist({
+    return updateWishlist({
       variables: {
         input: {
           where: { id: wishlistId },
