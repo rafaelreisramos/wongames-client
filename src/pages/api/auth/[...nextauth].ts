@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next-auth/internals/utils'
 import Providers from 'next-auth/providers'
 import NextAuth, { Session, User } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
@@ -34,18 +34,16 @@ const options = {
     jwt: async (token: JWT, user: User) => {
       if (user) {
         token.id = user.id
-        token.name = user.username
+        token.name = user.username as string
         token.email = user.email
         token.jwt = user.jwt
       }
 
       return Promise.resolve(token)
     },
-    session: async (session: Session, token: JWT) => {
-      if (session.user) {
-        session.user.id = token.id
-      }
-      session.accessToken = token.jwt
+    session: async (session: Session, user: User) => {
+      session.userId = user.id
+      session.accessToken = user.jwt
 
       return Promise.resolve(session)
     }
