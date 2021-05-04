@@ -12,6 +12,22 @@ export const Body = styled.div`
   `}
 `
 
+export const Error = styled.p`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    color: ${theme.colors.red};
+    font-size: ${theme.font.sizes.xsmall};
+    padding-top: ${theme.spacings.xsmall};
+
+    svg {
+      height: 2rem;
+      width: 2rem;
+      margin-right: ${theme.spacings.xxsmall};
+    }
+  `}
+`
+
 export const Footer = styled.div`
   ${({ theme }) => css`
     background: ${tint(0.2, theme.colors.lightGray)};
