@@ -12,6 +12,12 @@ export const Body = styled.div`
   `}
 `
 
+export const FreeGames = styled.p`
+  ${({ theme }) => css`
+    color: ${theme.colors.black};
+  `}
+`
+
 export const Error = styled.p`
   ${({ theme }) => css`
     display: flex;

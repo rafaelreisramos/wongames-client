@@ -8,7 +8,7 @@ import { useQueryGames } from 'graphql/queries/games'
 
 const CART_KEY = 'cart'
 
-type CartItem = {
+export type CartItem = {
   id: string
   img: string
   title: string
