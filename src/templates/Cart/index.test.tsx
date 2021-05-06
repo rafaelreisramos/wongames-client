@@ -7,6 +7,10 @@ import highlightMock from 'components/Highlight/data.mock'
 import Cart from '.'
 
 const props = {
+  session: {
+    accessToken: 'token',
+    user: { email: 'joe.doe@email.com' }
+  },
   recommendedTitle: 'You may like these games',
   recommendedGames: gamesMock,
   recommendedHighlight: highlightMock
