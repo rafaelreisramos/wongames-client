@@ -3,12 +3,14 @@ import { render, screen } from 'utils/test-utils'
 
 import gamesMock from 'components/GameCardSlider/data.mock'
 import highlightMock from 'components/Highlight/data.mock'
-import cardsMock from 'components/PaymentOptions/data.mock'
 
 import Cart from '.'
 
 const props = {
-  cards: cardsMock,
+  session: {
+    accessToken: 'token',
+    user: { email: 'joe.doe@email.com' }
+  },
   recommendedTitle: 'You may like these games',
   recommendedGames: gamesMock,
   recommendedHighlight: highlightMock
@@ -32,11 +34,11 @@ jest.mock('components/CartList', () => {
   }
 })
 
-jest.mock('components/PaymentOptions', () => {
+jest.mock('components/PaymentForm', () => {
   return {
     __esModule: true,
     default: function Mock() {
-      return <div data-testid="Mock PaymentOptions"></div>
+      return <div data-testid="Mock PaymentForm"></div>
     }
   }
 })
@@ -58,7 +60,7 @@ describe('<Cart />', () => {
       screen.getByRole('heading', { name: /My cart/i })
     ).toBeInTheDocument()
     expect(screen.getByTestId('Mock CartList')).toBeInTheDocument()
-    expect(screen.getByTestId('Mock PaymentOptions')).toBeInTheDocument()
+    expect(screen.getByTestId('Mock PaymentForm')).toBeInTheDocument()
     expect(screen.getByTestId('Mock Showcase')).toBeInTheDocument()
     expect(screen.queryByTestId('Mock Empty')).not.toBeInTheDocument()
   })
