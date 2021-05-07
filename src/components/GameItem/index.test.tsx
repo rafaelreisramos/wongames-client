@@ -68,4 +68,17 @@ describe('<GameItem />', () => {
     expect(screen.getByText(paymentInfo.number)).toBeInTheDocument()
     expect(screen.getByText(paymentInfo.purchaseDate)).toBeInTheDocument()
   })
+
+  it('should render free game when theres no paymentInfo', () => {
+    const paymentInfo = {
+      number: 'Free Game',
+      flag: null,
+      img: null,
+      purchaseDate: 'Purchase made on 03/26/2021 at 10:00'
+    }
+
+    render(<GameItem {...props} paymentInfo={paymentInfo} />)
+
+    expect(screen.getByText(/free game/i)).toBeInTheDocument()
+  })
 })
