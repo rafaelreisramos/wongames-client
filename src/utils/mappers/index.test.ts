@@ -3,8 +3,15 @@ import {
   QueryHome_banners,
   QueryHome_sections_newGames_highlight
 } from 'graphql/generated/QueryHome'
+import { QueryOrders_orders } from 'graphql/generated/QueryOrders'
 
-import { bannersMapper, cartMapper, gamesMapper, highlightMapper } from '.'
+import {
+  bannersMapper,
+  cartMapper,
+  gamesMapper,
+  highlightMapper,
+  ordersMapper
+} from '.'
 
 describe('bannersMapper()', () => {
   it('should map banners data to the right format', () => {
@@ -123,6 +130,98 @@ describe('cartMapper()', () => {
         title: 'Game name',
         img: 'http://localhost:1337/cover.jpg',
         price: '$100.00'
+      }
+    ])
+  })
+})
+
+describe('ordersMapper()', () => {
+  it('should return empty object if no orders', () => {
+    expect(ordersMapper(undefined)).toStrictEqual([])
+  })
+
+  it('should map orders data to the right format', () => {
+    const orders = [
+      {
+        __typename: 'Order',
+        id: '1',
+        created_at: '2021-05-05T19:13:50.961Z',
+        card_brand: 'mastercard',
+        card_last4: '1234',
+        games: [
+          {
+            id: '1',
+            name: 'Game title',
+            price: 215.0,
+            cover: {
+              url: '/image.jpg'
+            }
+          }
+        ]
+      }
+    ] as QueryOrders_orders[]
+
+    expect(ordersMapper(orders)).toStrictEqual([
+      {
+        id: '1',
+        paymentInfo: {
+          flag: 'mastercard',
+          img: '/img/cards/mastercard.png',
+          number: '**** **** **** 1234',
+          purchaseDate: 'Purchase made on May 5, 2021'
+        },
+        games: [
+          {
+            id: '1',
+            title: 'Game title',
+            downloadLink: 'https://wongames.com/game/download/gamelink1',
+            img: 'http://localhost:1337/image.jpg',
+            price: '$215.00'
+          }
+        ]
+      }
+    ])
+  })
+
+  it('should return free game when its free', () => {
+    const orders = [
+      {
+        __typename: 'Order',
+        id: '1',
+        created_at: '2021-05-05T19:13:50.961Z',
+        card_brand: null,
+        card_last4: null,
+        games: [
+          {
+            id: '1',
+            name: 'Game title',
+            price: 0,
+            cover: {
+              url: '/image.jpg'
+            }
+          }
+        ]
+      }
+    ] as QueryOrders_orders[]
+
+    expect(ordersMapper(orders)).toStrictEqual([
+      {
+        id: '1',
+        paymentInfo: {
+          flag: null,
+          img: null,
+          number: 'Free Game',
+          purchaseDate: 'Purchase made on May 5, 2021'
+        },
+        games: [
+          {
+            id: '1',
+            title: 'Game title',
+            downloadLink: 'https://wongames.com/game/download/gamelink1',
+            img: 'http://localhost:1337/image.jpg',
+            price: '$0.00'
+          }
+        ]
       }
     ])
   })
