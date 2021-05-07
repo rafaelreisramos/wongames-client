@@ -1,11 +1,17 @@
 import Empty from 'components/Empty'
-import GameItem, { GameItemProps } from 'components/GameItem'
+import GameItem, { GameItemProps, PaymentInfoProps } from 'components/GameItem'
 import Heading from 'components/Heading'
 
 import * as S from './styles'
 
+type OrderProps = {
+  id: string
+  paymentInfo: PaymentInfoProps
+  games: GameItemProps[]
+}
+
 export type OrdersListProps = {
-  items?: GameItemProps[]
+  items?: OrderProps[]
 }
 const OrdersList = ({ items = [] }: OrdersListProps) => (
   <S.Container>
@@ -15,9 +21,16 @@ const OrdersList = ({ items = [] }: OrdersListProps) => (
 
     {items.length ? (
       <ul>
-        {items.map((game) => (
-          <GameItem as="li" key={game.downloadLink} {...game} />
-        ))}
+        {items.map((order) => {
+          return order.games.map((game) => (
+            <GameItem
+              as="li"
+              key={`${order.id}-${game.id}`}
+              {...game}
+              paymentInfo={order.paymentInfo}
+            />
+          ))
+        })}
       </ul>
     ) : (
       <Empty

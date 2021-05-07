@@ -1,28 +1,38 @@
 export default [
   {
     id: '1',
-    img: 'https://source.unsplash.com/151x70',
-    title: 'Red Dead Redemption 2',
-    price: 'R$ 215,00',
-    downloadLink: 'https://wongames.com/game/download/gamelink1',
     paymentInfo: {
       flag: 'mastercard',
-      img: '/img/master-card.png',
+      img: '/img/cards/mastercard.png',
       number: '**** **** **** 1234',
-      purchaseDate: 'Purchase made on 03/28/2021 at 20:32'
-    }
+      purchaseDate: 'Purchase made on May 5, 2021'
+    },
+    games: [
+      {
+        id: '1',
+        title: 'Game title',
+        downloadLink: 'https://wongames.com/game/download/gamelink1',
+        img: 'http://localhost:1337/image.jpg',
+        price: '$215.00'
+      }
+    ]
   },
   {
     id: '2',
-    img: 'https://source.unsplash.com/151x70',
-    title: 'Red Dead Redemption 2',
-    price: 'R$ 215,00',
-    downloadLink: 'https://wongames.com/game/download/gamelink2',
     paymentInfo: {
       flag: 'visa',
-      img: '/img/visa.png',
-      number: '**** **** **** 2345',
-      purchaseDate: 'Purchase made on 03/28/2021 at 21:12'
-    }
+      img: '/img/cards/visa.png',
+      number: '**** **** **** 4321',
+      purchaseDate: 'Purchase made on May 5, 2021'
+    },
+    games: [
+      {
+        id: '1',
+        title: 'Game title',
+        downloadLink: 'https://wongames.com/game/download/gamelink1',
+        img: 'http://localhost:1337/image.jpg',
+        price: '$215.00'
+      }
+    ]
   }
 ]
