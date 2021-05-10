@@ -1,3 +1,4 @@
+import 'nextImageMock'
 import '@testing-library/jest-dom'
 import 'jest-styled-components'
 import dotenv from 'dotenv'

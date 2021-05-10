@@ -21,14 +21,9 @@ const placeholderShimmer = keyframes`
 `
 
 export const ImageBox = styled.a`
-  height: 14rem;
+  min-height: 14rem;
+  position: relative;
   width: 100%;
-
-  img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
 
   background-size: 80rem 14rem;
   background: #f6f7f8;

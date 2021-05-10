@@ -102,19 +102,14 @@ exports[`<GameCard /> should render correctly 1`] = `
 }
 
 .c1 {
-  height: 14rem;
+  min-height: 14rem;
+  position: relative;
   width: 100%;
   background-size: 80rem 14rem;
   background: #f6f7f8;
   background-image: linear-gradient( to right,#f6f7f8 0%,#edeef1 20%,#f6f7f8 40%,#f6f7f8 100% );
   -webkit-animation: brWVkT 1s linear infinite forwards;
   animation: brWVkT 1s linear infinite forwards;
-}
-
-.c1 img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
 }
 
 .c2 {
@@ -207,6 +202,7 @@ exports[`<GameCard /> should render correctly 1`] = `
   >
     <img
       alt="Red Dead II"
+      layout="fill"
       src="img/red-dead-img.jpg"
     />
   </a>

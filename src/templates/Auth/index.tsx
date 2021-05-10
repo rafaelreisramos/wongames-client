@@ -4,6 +4,7 @@ import Heading from 'components/Heading'
 import Logo from 'components/Logo'
 
 import * as S from './styles'
+import Image from 'next/image'
 
 type AuthProps = {
   title: string
@@ -13,6 +14,12 @@ type AuthProps = {
 const Auth = ({ title, children }: AuthProps) => (
   <S.Container>
     <S.BannerBox>
+      <Image
+        src="/img/auth-bg.jpg"
+        alt="Auth page"
+        layout="fill"
+        objectFit="cover"
+      />
       <S.BannerContent>
         <Link href="/">
           <a>
