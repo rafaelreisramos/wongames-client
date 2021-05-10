@@ -10,7 +10,7 @@ const Footer = () => (
     <Logo color="black" />
 
     <S.Content>
-      <S.Column>
+      <S.Column aria-label="contact">
         <Heading color="black" size="small" lineBottom lineColor="secondary">
           Contact
         </Heading>
@@ -18,12 +18,12 @@ const Footer = () => (
         <a href="mailto:">sac@wongames.com</a>
       </S.Column>
 
-      <S.Column>
+      <S.Column aria-labelledby="social-media">
         <Heading color="black" size="small" lineBottom lineColor="secondary">
           Follow Us
         </Heading>
 
-        <nav aria-labelledby="social media">
+        <nav id="social-media">
           <a
             href="https://www.instagram.com"
             target="_blank"
@@ -55,19 +55,19 @@ const Footer = () => (
         </nav>
       </S.Column>
 
-      <S.Column>
+      <S.Column aria-labelledby="resources">
         <Heading color="black" size="small" lineBottom lineColor="secondary">
           Links
         </Heading>
 
-        <nav aria-labelledby="footer resources">
+        <nav id="resources">
           <Link href="/games">Home</Link>
           <Link href="/games">Store</Link>
           <Link href="/search">Buscar</Link>
         </nav>
       </S.Column>
 
-      <S.Column>
+      <S.Column aria-label="where-we-are">
         <Heading color="black" size="small" lineBottom lineColor="secondary">
           Location
         </Heading>

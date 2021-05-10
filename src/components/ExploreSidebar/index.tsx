@@ -109,7 +109,12 @@ const ExploreSidebar = ({
       </S.Content>
 
       <S.Footer>
-        <Button fullWidth size="medium" onClick={handleFilterMenu}>
+        <Button
+          fullWidth
+          size="medium"
+          onClick={handleFilterMenu}
+          aria-label="filter"
+        >
           Filter
         </Button>
       </S.Footer>

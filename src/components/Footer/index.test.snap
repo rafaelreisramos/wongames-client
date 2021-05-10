@@ -43,11 +43,11 @@ exports[
 .c3 a,
 .c3 span {
   display: block;
-  color: #8f8f8f;
+  color: #5c5c5c;
   -webkit-text-decoration: none;
   text-decoration: none;
   margin-bottom: 0.8rem;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 
 .c3 a:hover {
@@ -162,6 +162,7 @@ exports[
     class="c2"
   >
     <div
+      aria-label="contact"
       class="c3"
     >
       <h2
@@ -177,6 +178,7 @@ exports[
       </a>
     </div>
     <div
+      aria-labelledby="social-media"
       class="c3"
     >
       <h2
@@ -186,7 +188,7 @@ exports[
         Follow Us
       </h2>
       <nav
-        aria-labelledby="social media"
+        id="social-media"
       >
         <a
           href="https://www.instagram.com"
@@ -219,6 +221,7 @@ exports[
       </nav>
     </div>
     <div
+      aria-labelledby="resources"
       class="c3"
     >
       <h2
@@ -228,7 +231,7 @@ exports[
         Links
       </h2>
       <nav
-        aria-labelledby="footer resources"
+        id="resources"
       >
         <a
           href="/games"
@@ -248,6 +251,7 @@ exports[
       </nav>
     </div>
     <div
+      aria-label="where-we-are"
       class="c3"
     >
       <h2

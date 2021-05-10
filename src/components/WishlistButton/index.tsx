@@ -42,11 +42,12 @@ const WishlistButton = ({
         loading ? (
           <Spinner />
         ) : isInWishlist(id) ? (
-          <Favorite aria-label={buttonText} />
+          <Favorite />
         ) : (
-          <FavoriteBorder aria-label={buttonText} />
+          <FavoriteBorder />
         )
       }
+      aria-label={buttonText}
     >
       {hasText && buttonText}
     </Button>

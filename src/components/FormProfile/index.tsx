@@ -41,7 +41,9 @@ const FormProfile = ({ username, email }: FormProfileProps) => (
           </Button>
         </Link>
 
-        <Button size="medium">Save</Button>
+        <Button size="medium" aria-label="save">
+          Save
+        </Button>
       </S.ButtonsContainer>
     </S.Form>
   </S.Container>
