@@ -78,9 +78,10 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     setWishlistItems(data?.wishlists[0]?.games || [])
   }, [data])
 
-  const wishlistIds = useMemo(() => wishlistItems.map((game) => game.id), [
-    wishlistItems
-  ])
+  const wishlistIds = useMemo(
+    () => wishlistItems.map((game) => game.id),
+    [wishlistItems]
+  )
 
   const isInWishlist = (id: string) =>
     !!wishlistItems.find((game) => game.id === id)

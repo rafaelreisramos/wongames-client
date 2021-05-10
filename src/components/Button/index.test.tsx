@@ -65,17 +65,21 @@ describe('<Heading />', () => {
       color: '#f231a5'
     })
 
-    expect(
-      screen.getByRole('button', { name: /button/i })
-    ).toHaveStyleRule('background', 'none', { modifier: ':hover' })
+    expect(screen.getByRole('button', { name: /button/i })).toHaveStyleRule(
+      'background',
+      'none',
+      { modifier: ':hover' }
+    )
   })
 
   it('should render a disabled button', () => {
     render(<Button disabled>Button</Button>)
 
-    expect(
-      screen.getByRole('button', { name: /button/i })
-    ).toHaveStyleRule('cursor', 'not-allowed', { modifier: ':disabled' })
+    expect(screen.getByRole('button', { name: /button/i })).toHaveStyleRule(
+      'cursor',
+      'not-allowed',
+      { modifier: ':disabled' }
+    )
   })
 
   it('should render button as a link', () => {

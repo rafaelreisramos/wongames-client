@@ -6,25 +6,25 @@ describe('<Heading />', () => {
   it('should render a white heading by default', () => {
     render(<Heading>Most Populars</Heading>)
 
-    expect(
-      screen.getByRole('heading', { name: /most populars/i })
-    ).toHaveStyle({ color: '#fafafa' })
+    expect(screen.getByRole('heading', { name: /most populars/i })).toHaveStyle(
+      { color: '#fafafa' }
+    )
   })
 
   it('should render a black heading when color is passed', () => {
     render(<Heading color="black">Most Populars</Heading>)
 
-    expect(
-      screen.getByRole('heading', { name: /most populars/i })
-    ).toHaveStyle({ color: '#030517' })
+    expect(screen.getByRole('heading', { name: /most populars/i })).toHaveStyle(
+      { color: '#030517' }
+    )
   })
 
   it('should render a heading with a left line', () => {
     render(<Heading lineLeft>Most Populars</Heading>)
 
-    expect(
-      screen.getByRole('heading', { name: /most populars/i })
-    ).toHaveStyle({ 'border-left': '0.5rem solid #f231a5' })
+    expect(screen.getByRole('heading', { name: /most populars/i })).toHaveStyle(
+      { 'border-left': '0.5rem solid #f231a5' }
+    )
   })
 
   it('should render a heading with a bottom line', () => {
@@ -44,9 +44,9 @@ describe('<Heading />', () => {
       </Heading>
     )
 
-    expect(
-      screen.getByRole('heading', { name: /most populars/i })
-    ).toHaveStyle({ 'font-size': '1.6rem' })
+    expect(screen.getByRole('heading', { name: /most populars/i })).toHaveStyle(
+      { 'font-size': '1.6rem' }
+    )
 
     expect(
       screen.getByRole('heading', { name: /most populars/i })
@@ -62,9 +62,9 @@ describe('<Heading />', () => {
       </Heading>
     )
 
-    expect(
-      screen.getByRole('heading', { name: /most populars/i })
-    ).toHaveStyle({ 'font-size': '5.2rem' })
+    expect(screen.getByRole('heading', { name: /most populars/i })).toHaveStyle(
+      { 'font-size': '5.2rem' }
+    )
   })
 
   it('should render a heading with a primary line color', () => {
