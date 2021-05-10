@@ -7,10 +7,11 @@ import { QueryOrders_orders } from 'graphql/generated/QueryOrders'
 import { QueryWishlist_wishlists_games } from 'graphql/generated/QueryWishlist'
 
 import formatPrice from 'utils/formatPrice'
+import { getImageUrl } from 'utils/getImageUrl'
 
 export const bannersMapper = (banners: QueryHome_banners[]) => {
   return banners.map((banner) => ({
-    img: `http://localhost:1337${banner.image?.url}`,
+    img: `${getImageUrl(banner.image?.url)}`,
     title: banner.title,
     subtitle: banner.subtitle,
     ...(banner.button && {
@@ -34,7 +35,7 @@ export const gamesMapper = (
         title: game.name,
         slug: game.slug,
         developer: game.developers[0].name,
-        img: `http://localhost:1337${game.cover?.url}`,
+        img: `${getImageUrl(game.cover?.url)}`,
         price: game.price
       }))
     : []
@@ -45,8 +46,8 @@ export const highlightMapper = (
 ) => {
   return highlight
     ? {
-        backgroundImage: `http://localhost:1337${highlight?.background?.url}`,
-        floatImage: `http://localhost:1337${highlight?.floatImage?.url}`,
+        backgroundImage: `${getImageUrl(highlight?.background?.url)}`,
+        floatImage: `${getImageUrl(highlight?.floatImage?.url)}`,
         alignment: highlight?.alignment,
         title: highlight?.title,
         subtitle: highlight?.subtitle,
@@ -61,7 +62,7 @@ export const cartMapper = (games: QueryGames_games[] | undefined) => {
     ? games.map((game) => ({
         id: game.id,
         title: game.name,
-        img: `http://localhost:1337${game.cover?.url}`,
+        img: `${getImageUrl(game.cover?.url)}`,
         price: formatPrice(game.price)
       }))
     : []
@@ -87,7 +88,7 @@ export const ordersMapper = (orders: QueryOrders_orders[] | undefined) => {
           id: game.id,
           title: game.name,
           downloadLink: 'https://wongames.com/game/download/gamelink1',
-          img: `http://localhost:1337${game.cover?.url}`,
+          img: `${getImageUrl(game.cover?.url)}`,
           price: formatPrice(game.price)
         }))
       }))
