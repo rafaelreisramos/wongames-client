@@ -1,6 +1,10 @@
 import NextNprogress from 'nextjs-progressbar'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
+
+import { DefaultSeo } from 'next-seo'
+import SEO from '../../next-seo.config'
+
 import { Provider as AuthProvider } from 'next-auth/client'
 import { ThemeProvider } from 'styled-components'
 import { ApolloProvider } from '@apollo/client'
@@ -31,6 +35,7 @@ function App({ Component, pageProps }: AppProps) {
                 />
               </Head>
 
+              <DefaultSeo {...SEO} />
               <Component {...pageProps} />
               <GlobalStyles />
               <NextNprogress
