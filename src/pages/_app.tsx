@@ -22,21 +22,12 @@ function App({ Component, pageProps }: AppProps) {
             <WishlistProvider>
               <Head>
                 <title>Won Games</title>
-                <link
-                  rel="shortcut icon"
-                  type="image/png"
-                  href="/img/favicon-32x32.png"
-                />
-                <link
-                  rel="apple-touch-icon"
-                  type="image/png"
-                  href="/img/apple-touch-icon.png"
-                />
+                <link rel="shortcut icon" href="/img/icon-512.png" />
+                <link rel="apple-touch-icon" href="/img/icon-512.png" />
                 <link rel="manifest" href="/manifest.json" />
-                <meta name="theme-color" content="#ffffff" />
                 <meta
                   name="description"
-                  content="The best game store in the world"
+                  content="The best Game Store in the world"
                 />
               </Head>
 
