@@ -19,7 +19,7 @@ type PaymentFormProps = {
 }
 
 const PaymentForm = ({ session }: PaymentFormProps) => {
-  const { items, clearCart } = useCart()
+  const { items } = useCart()
   const { push } = useRouter()
   const stripe = useStripe()
   const elements = useElements()
@@ -77,7 +77,6 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
     if (freeGames) {
       saveOrder()
       push('/success')
-      clearCart()
       return
     }
 
@@ -96,7 +95,6 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
 
       saveOrder(payload.paymentIntent)
       push('/success')
-      clearCart()
     }
   }
 

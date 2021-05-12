@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState
+} from 'react'
 
 import { getStorageItem, setStorageItem } from 'utils/localStorage'
 import { cartMapper } from 'utils/mappers'
@@ -78,7 +84,7 @@ const CartProvider = ({ children }: CartProviderProps) => {
     saveCart(newCartItems)
   }
 
-  const clearCart = () => saveCart([])
+  const clearCart = useCallback(() => saveCart([]), [])
 
   return (
     <CartContext.Provider
