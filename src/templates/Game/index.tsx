@@ -15,7 +15,7 @@ import Showcase from 'components/Showcase'
 import * as S from './styles'
 
 export type GameTemplateProps = {
-  slug: string
+  slug?: string
   cover: string
   gameInfo: GameInfoProps
   gallery?: GalleryImageProps[]
