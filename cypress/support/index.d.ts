@@ -1,12 +1,11 @@
-// load type definition from Cypress module
 /// <reference types="cypress" />
 
 declare namespace Cypress {
   interface Chainable {
     /**
-     * Custom command to visit Google homepage
-     * @example cy.google()
+     * Custom command to check banner in page
+     * @example cy.shouldRenderBanner()
      */
-    google(): Chainable<Window>
+    shouldRenderBanner(): Chainable<Element>
   }
 }

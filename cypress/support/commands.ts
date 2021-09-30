@@ -24,3 +24,14 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import '@testing-library/cypress/add-commands'
+
+Cypress.Commands.add('shouldRenderBanner', () => {
+  cy.get('.slick-slider').within(() => {
+    cy.findByRole('heading', { name: /cyberpunk 2077/i })
+
+    cy.get('.slick-dots > :nth-child(2) > button').click()
+    cy.wait(500)
+
+    cy.findByRole('heading', { name: /cs\:go/i })
+  })
+})
