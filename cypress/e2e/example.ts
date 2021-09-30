@@ -1,7 +1,7 @@
 /// <reference path="../support/index.d.ts" />
 
 describe('Cypress TS', () => {
-  it.skip('should got to Google homepage', () => {
+  it.skip('should go to Google homepage', () => {
     cy.google()
   })
 

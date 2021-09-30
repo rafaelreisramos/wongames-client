@@ -11,6 +11,7 @@
     "test:watch": "yarn test --watch",
     "test:coverage": "yarn test --coverage",
     "cy:open": "cypress open",
+    "cy:run": "cypress run",
     "generate": "yarn plop --plopfile ./generators/plopfile.js",
     "schema:download": "apollo client:download-schema --endpoint=http://localhost:1337/graphql schema-temp.gql",
     "schema:convert": "node convertToNonNull.js",
