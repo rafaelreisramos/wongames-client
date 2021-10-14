@@ -32,7 +32,7 @@ const GameDetails = ({
   }
 
   return (
-    <S.Container>
+    <S.Container data-cy="game-details">
       <MediaMatch greaterThan="small">
         <Heading lineLeft lineColor="secondary">
           Game Details

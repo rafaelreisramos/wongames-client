@@ -7,7 +7,7 @@ export type TextContentProps = {
   content: string
 }
 const TextContent = ({ title, content }: TextContentProps) => (
-  <S.Container>
+  <S.Container data-cy="content">
     {!!title && (
       <Heading lineLeft lineColor="secondary">
         {title}
