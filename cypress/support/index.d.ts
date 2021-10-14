@@ -11,7 +11,7 @@ declare namespace Cypress {
      * Custom command to get elements by data-cy
      * @example cy.getByDataCy()
      */
-     getByDataCy(selector: string): Chainable<Element>
+     getByDataCy(selector: string, args?: Partial<Cypress.Timeoutable>): Chainable<Element>
 
     /**
      * Custom command to check banner in page
@@ -23,7 +23,6 @@ declare namespace Cypress {
      * Custom command to check showcase in page
      * @example cy.shouldRenderShowcase()
      */
-    shouldRenderShowcase(attrs: ShowcaseAttributes): Chainable<Element>
-
+    shouldRenderShowcase(attrs: ShowcaseAttributes, args?: Partial<Cypress.Timeoutable>): Chainable<Element>
   }
 }

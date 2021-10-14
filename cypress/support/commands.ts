@@ -15,8 +15,8 @@ Cypress.Commands.add('shouldRenderBanner', () => {
   })
 })
 
-Cypress.Commands.add('shouldRenderShowcase', ({ name, highlight = false }) => {
-  cy.getByDataCy(`${name}`).within(() => {
+Cypress.Commands.add('shouldRenderShowcase', ({ name, highlight = false }, ...args) => {
+  cy.getByDataCy(`${name}`, ...args).within(() => {
     cy.findByRole('heading', { name }).should('exist')
 
     cy.getByDataCy("highlight").should(highlight ? 'exist' : 'not.exist')
