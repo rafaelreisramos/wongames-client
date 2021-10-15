@@ -32,3 +32,9 @@ Cypress.Commands.add('shouldRenderShowcase', ({ name, highlight = false }, ...ar
     }
   })
 })
+
+Cypress.Commands.add('getFields', (fields) => {
+  fields.map(({ label }) => {
+    cy.findByLabelText(label).should('exist')
+  })
+})
