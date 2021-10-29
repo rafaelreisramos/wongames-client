@@ -8,7 +8,5 @@ module.exports = withPWA({
   images: {
     domains: ['localhost']
   },
-  future: {
-    webpack5: true
-  }
+  webpack5: true
 })
