@@ -1,5 +1,6 @@
 /// <reference path="../support/index.d.ts" />
 
+import { findByText } from '@testing-library/cypress/node_modules/@testing-library/dom'
 import { genreFields, platformFields, priceFields, sortFields } from '../../src/utils/filter/fields'
 
 describe('Explore Page', () => {
@@ -77,5 +78,28 @@ describe('Explore Page', () => {
     cy.getByDataCy('game-card').first().within(() => {
       cy.shouldBeLessThan(500)
     })
+  })
+
+  it('should filter by paltform and genre', () => {
+    cy.findByText(/windows/i).click()
+    cy.location('href').should('contain', 'platforms=windows')
+
+    cy.findByText(/linux/i).click()
+    cy.location('href').should('contain', 'platforms=linux')
+
+    cy.findByText(/mac os/i).click()
+    cy.location('href').should('contain', 'platforms=mac')
+
+    cy.findByText(/action/i).click()
+    cy.location('href').should('contain', 'categories=action')
+  })
+
+  it('should show empty when filter criteria are not matched', () => {
+    cy.visit('/games')
+
+    cy.findByText(/free/i).click()
+    cy.findByText(/linux/i).click()
+    cy.findByText(/sports/i).click()
+    cy.findByText(/Sorry, no games found matching this search criteria/i)
   })
 })
