@@ -100,6 +100,7 @@ describe('Explore Page', () => {
     cy.findByText(/free/i).click()
     cy.findByText(/linux/i).click()
     cy.findByText(/sports/i).click()
+    cy.getByDataCy('game-card').should('not.exist')
     cy.findByText(/Sorry, no games found matching this search criteria/i)
   })
 })
