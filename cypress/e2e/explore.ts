@@ -1,6 +1,5 @@
 /// <reference path="../support/index.d.ts" />
 
-import { findByText } from '@testing-library/cypress/node_modules/@testing-library/dom'
 import { genreFields, platformFields, priceFields, sortFields } from '../../src/utils/filter/fields'
 
 describe('Explore Page', () => {
@@ -101,6 +100,6 @@ describe('Explore Page', () => {
     cy.findByText(/linux/i).click()
     cy.findByText(/sports/i).click()
     cy.getByDataCy('game-card').should('not.exist')
-    cy.findByText(/Sorry, no games found matching this search criteria/i)
+    cy.findByText(/Sorry, no games found matching this search criteria/i).should('exist')
   })
 })
