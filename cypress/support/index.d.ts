@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { User } from "./generate"
+
 type ShowcaseAttributes = {
   name: string
   highlight?: boolean
@@ -47,5 +49,11 @@ declare namespace Cypress {
      * @example cy.shouldBeGreaterThan(100)
      */
     shouldBeGreaterThan(value: number): Chainable<Element>   
+ 
+    /**
+     * Custom command to sign up
+     * @example cy.signUp(user)
+     */
+     signUp(user: User): Chainable<Element>   
   }
 }
