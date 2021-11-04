@@ -2,5 +2,6 @@
   "nodeVersion": "system",
   "video": false,
   "integrationFolder": "cypress/e2e",
-  "baseUrl": "http://localhost:3000"
+  "baseUrl": "http://localhost:3000",
+  "defaultCommandTimeout": 8000
 }
