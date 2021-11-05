@@ -32,7 +32,7 @@ const Success = ({
     <Base>
       <Container>
         <S.Container>
-          <S.Heading>You purchase was successful</S.Heading>
+          <S.Heading>Your purchase was successful</S.Heading>
 
           <S.CheckMark>
             <Done />
