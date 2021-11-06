@@ -34,7 +34,7 @@ const GameCard = ({
   ribbonSize = 'small',
   ribbonColor = 'primary'
 }: GameCardProps) => (
-  <S.Container>
+  <S.Container data-cy="game-card">
     {!!ribbon && (
       <Ribbon size={ribbonSize} color={ribbonColor}>
         {ribbon}

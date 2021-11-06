@@ -18,7 +18,7 @@ const Showcase = ({
   games,
   color = 'white'
 }: ShowcaseProps) => (
-  <S.Container>
+  <S.Container data-cy={title || 'showcase'}>
     {!!title && (
       <Heading lineLeft lineColor="secondary">
         {title}
