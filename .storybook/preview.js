@@ -1,15 +1,13 @@
 import '../.jest/nextImageMock'
-import { addDecorator } from '@storybook/react'
-import { withNextRouter } from 'storybook-addon-next-router'
 import { ThemeProvider } from 'styled-components'
+import { RouterContext } from 'next/dist/next-server/lib/router-context'
 import { CartContext, CartContextDefaultValues } from 'hooks/use-cart'
 
 import GlobalStyles from 'styles/global'
 import theme from 'styles/theme'
 
-addDecorator(withNextRouter())
-
 export const parameters = {
+  actions: { argTypesRegex: "^on[A-Z].*" },
   backgrounds: {
     default: 'won-light',
     values: [
@@ -23,7 +21,9 @@ export const parameters = {
       }
     ]
   },
-  actions: { argTypesRegex: "^on[A-Z].*" }
+  nextRouter: {
+    Provider: RouterContext.Provider
+  }
 }
 
 export const decorators = [
