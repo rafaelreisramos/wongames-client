@@ -11,6 +11,7 @@
     "test:watch": "yarn test --watch",
     "test:coverage": "yarn test --coverage",
     "test:e2e": "start-server-and-test dev http://localhost:3000 cy:open",
+    "test:e2e:ci": "start-server-and-test start 3000 cy:run",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "generate": "yarn plop --plopfile ./generators/plopfile.js",
