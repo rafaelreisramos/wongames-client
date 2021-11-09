@@ -1,12 +1,15 @@
 module.exports = {
-  "stories": [
-    "../src/components/**/*.stories.@(js|jsx|ts|tsx)"
-  ],
-  "addons": [
+  addons: [
     "@storybook/addon-essentials",
     "storybook-addon-next-router"
   ],
-  "webpackFinal": (config) => {
+  features: {
+    postcss: false
+  },
+  stories: [
+    "../src/components/**/*.stories.@(js|jsx|ts|tsx)"
+  ],
+  webpackFinal: (config) => {
     config.resolve.modules.push(`${process.cwd()}/src`)
     return config
   }
