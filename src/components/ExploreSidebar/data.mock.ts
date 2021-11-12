@@ -1,4 +1,4 @@
-export default [
+const dataMock = [
   {
     title: 'Price',
     name: 'price',
@@ -104,3 +104,5 @@ export default [
     ]
   }
 ]
+
+export default dataMock
