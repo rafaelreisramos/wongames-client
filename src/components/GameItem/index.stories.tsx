@@ -34,7 +34,7 @@ withPayment.args = {
   paymentInfo: {
     number: '**** **** **** 1234',
     flag: 'mastercard',
-    img: '/img/master-card.png',
+    img: '/img/cards/mastercard.png',
     purchaseDate: 'Purchase made on 03/26/2021 at 10:00'
   }
 }
