@@ -1,4 +1,4 @@
-export default [
+const dataMock = [
   {
     id: '1',
     slug: 'population-zero',
@@ -54,3 +54,5 @@ export default [
     promotionalPrice: 215
   }
 ]
+
+export default dataMock

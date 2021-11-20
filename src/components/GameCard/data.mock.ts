@@ -1,4 +1,4 @@
-export default {
+const dataMock = {
   id: '1',
   slug: 'red-dead-ii',
   title: 'Red Dead II',
@@ -7,3 +7,5 @@ export default {
   price: 235,
   promotionalPrice: 195
 }
+
+export default dataMock

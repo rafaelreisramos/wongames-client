@@ -1,4 +1,4 @@
-export default [
+const dataMock = [
   {
     src: '/img/games/cyberpunk-1.jpg',
     label: 'Gallery Image 1'
@@ -24,3 +24,5 @@ export default [
     label: 'Gallery Image 6'
   }
 ]
+
+export default dataMock

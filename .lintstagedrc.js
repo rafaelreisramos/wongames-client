@@ -1,3 +1,3 @@
 module.exports = {
-  'src/**/*': ['yarn lint --fix', 'yarn test --findRelatedTests --bail']
+  'src/**/*': ['eslint --fix', 'yarn test --findRelatedTests --bail']
 }
