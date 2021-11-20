@@ -1,12 +1,16 @@
 module.exports = {
-  "stories": [
-    "../src/components/**/*.stories.@(js|jsx|ts|tsx)"
+  addons: [
+    "@storybook/addon-essentials",
+    "storybook-addon-next-router"
   ],
-  "addons": [
-    "@storybook/addon-essentials"
-  ],
-  "webpackFinal": (config) => {
+  core: {
+    builder: 'webpack5',
+  },
+  webpackFinal: (config) => {
     config.resolve.modules.push(`${process.cwd()}/src`)
     return config
-  }
+  },
+  stories: [
+    "../src/components/**/*.stories.@(js|jsx|ts|tsx)"
+  ]
 }
