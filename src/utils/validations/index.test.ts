@@ -31,7 +31,7 @@ describe('validations', () => {
       const values = { email: '', password: '1234' }
 
       expect(signInValidate(values).password).toMatchInlineSnapshot(
-        `"\\"password\\" length must be at least 8 characters long"`
+        `"\\"password\\" length must be at least 6 characters long"`
       )
     })
   })
@@ -76,7 +76,7 @@ describe('validations', () => {
       const values = { username: '', email: '', password: '1234' }
 
       expect(signUpValidate(values).password).toMatchInlineSnapshot(
-        `"\\"password\\" length must be at least 8 characters long"`
+        `"\\"password\\" length must be at least 6 characters long"`
       )
     })
 
@@ -142,7 +142,7 @@ describe('validations', () => {
       const values = { password: '1234' } as ResetValidateValues
 
       expect(resetValidate(values).password).toMatchInlineSnapshot(
-        `"\\"password\\" length must be at least 8 characters long"`
+        `"\\"password\\" length must be at least 6 characters long"`
       )
     })
 

@@ -9,7 +9,7 @@ const fieldsValidations = {
     .email({ tlds: { allow: false } })
     .required(),
 
-  password: Joi.string().min(8).required(),
+  password: Joi.string().min(6).required(),
 
   confirm_password: Joi.string()
     .valid(Joi.ref('password'))
