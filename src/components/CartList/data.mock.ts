@@ -1,4 +1,4 @@
-export default [
+const dataMock = [
   {
     id: '1',
     img: 'https://source.unsplash.com/151x70',
@@ -12,3 +12,5 @@ export default [
     price: 'RS 215,00'
   }
 ]
+
+export default dataMock

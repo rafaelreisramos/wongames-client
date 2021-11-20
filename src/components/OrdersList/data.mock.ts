@@ -1,4 +1,4 @@
-export default [
+const dataMock = [
   {
     id: '1',
     paymentInfo: {
@@ -36,3 +36,5 @@ export default [
     ]
   }
 ]
+
+export default dataMock
