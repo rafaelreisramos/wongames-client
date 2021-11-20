@@ -11,7 +11,7 @@ Cypress.Commands.add('shouldRenderBanner', () => {
     cy.get('.slick-dots > :nth-child(2) > button').click()
     cy.wait(500)
 
-    cy.findByRole('heading', { name: /cs\:go/i })
+    cy.findByRole('heading', { name: /Horizon Zero Dawn/i })
   })
 })
 
@@ -65,7 +65,7 @@ Cypress.Commands.add('signUp', (user) => {
   cy.findByRole('button', { name: /Sign up now/i }).click()
 })
 
-Cypress.Commands.add('signIn', (email = 'e2e@wongames.com', password = '12345678') => {
+Cypress.Commands.add('signIn', (email = 'e2e@wongames.com', password = '123456') => {
   cy.findByPlaceholderText(/e-mail/i).type(email)
   cy.findByPlaceholderText(/password/i).type(password)
   cy.findByRole('button', { name: /sign in now/i }).click()
